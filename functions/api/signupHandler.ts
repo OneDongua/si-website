@@ -4,7 +4,7 @@ interface Env {
 
 export const onRequest: PagesFunction<Env> = async (context) => {
   if (context.request.method === "POST") {
-    let body = await JSON.parse(context.request.json());
+    let body = await JSON.parse(context.request.body?.text);
 
     if (!body) {
       return new Response("Error", { status: 400 });
