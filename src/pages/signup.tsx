@@ -76,6 +76,19 @@ function Form() {
             classes: classes,
             email: email,
           };
+          fetch("/api/signupHandler", {
+            method: "POST",
+            body: JSON.stringify({ timestamp: Date.now(), data: data }),
+          })
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
           //upload(JSON.stringify(data));
         }}>
         提交
