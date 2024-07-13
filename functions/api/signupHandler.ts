@@ -10,7 +10,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       return new Response("Error", { status: 400 });
     }
 
-    await context.env.PART_LIST.put(body.timestamp, body.data);
+    await context.env.PART_LIST.put(String(body.timestamp), String(body.data));
     return new Response("ok");
   }
   return new Response("Hello World!");
