@@ -4,7 +4,7 @@ import type * as Preset from "@docusaurus/preset-classic";
 
 const config: Config = {
   title: "智能信息社",
-  //tagline: "Dinosaurs are cool",
+  tagline: "你所热爱的，尽在此处",
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
@@ -33,13 +33,7 @@ const config: Config = {
     [
       "classic",
       {
-        docs: {
-          sidebarPath: "./sidebars.ts",
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
-        },
+        docs: false,
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
@@ -62,14 +56,9 @@ const config: Config = {
         src: "img/logo.png",
       },
       items: [
-        { to: "signup", label: "🔥报名", position: "left" },
-        {
-          type: "docSidebar",
-          sidebarId: "tutorialSidebar",
-          position: "left",
-          label: "Tutorial",
-        },
+        { to: "sign_up", label: "🔥报名", position: "left" },
         { to: "/blog", label: "Blog", position: "left" },
+        { to: "about_us", label: "关于", position: "right" },
         {
           href: "https://github.com/OneDongua/si-website",
           className: "header-github-link",
@@ -81,33 +70,20 @@ const config: Config = {
       style: "light",
       links: [
         {
-          title: "Docs",
+          title: "一些东西",
           items: [
             {
-              label: "Tutorial",
-              to: "/docs/intro",
-            },
-          ],
-        },
-        {
-          title: "Community",
-          items: [
-            {
-              label: "Stack Overflow",
-              href: "https://stackoverflow.com/questions/tagged/docusaurus",
+              label: "百度",
+              href: "https://www.baidu.com",
             },
             {
-              label: "Discord",
-              href: "https://discordapp.com/invite/docusaurus",
-            },
-            {
-              label: "Twitter",
-              href: "https://twitter.com/docusaurus",
+              label: "必应",
+              href: "https://www.bing.com",
             },
           ],
         },
       ],
-      //copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} 智能信息社. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,

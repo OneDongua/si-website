@@ -31,9 +31,9 @@
   border-color: var(--ifm-color-primary);
 }
 
-.button {
+.submitButton {
   height: 40px;
-  max-width: 80px;
+  //max-width: 80px;
   align-self: flex-end;
 }
 
@@ -45,4 +45,8 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.hidden {
+  display: none;
 }

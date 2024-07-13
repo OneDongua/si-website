@@ -1,7 +1,7 @@
 # si-website
 A website based on Docusaurus.
 
-# Website
+# Docusaurus
 
 This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
 

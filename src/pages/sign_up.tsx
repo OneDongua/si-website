@@ -1,39 +1,20 @@
 import Layout from "@theme/Layout";
 import { useState } from "react";
 
-import styles from "./signup.module.css";
+import styles from "./sign_up.module.css";
 import clsx from "clsx";
-
-async function upload(data: string) {
-  const url = "https://dav.jianguoyun.com/dav/test/test.json";
-
-  await fetch(url, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "text/plain",
-      Authorization: "Basic ODc1NjU4Njk3QHFxLmNvbTphMnA3Y2ZnY3QyeWZ1aHI4", // 个人密钥
-    },
-    body: data,
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.text();
-      } else {
-        throw new Error("Network response was not ok");
-      }
-    })
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}
-
 function Form() {
   const [name, setName] = useState("");
   const [classes, setClasses] = useState("");
   const [email, setEmail] = useState("");
+  const [status, setStatus] = useState(0);
+
+  let statusTexts = {
+    0: "提交",
+    1: "提交中…",
+    2: "提交成功",
+    3: "重试",
+  };
 
   return (
     <div className={clsx("card shadow--md", styles.card)}>
@@ -44,7 +25,10 @@ function Form() {
           className={styles.input}
           type="text"
           id="name"
-          onChange={(e) => setName(e.target.value)}
+          placeholder="李华"
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
         />
       </div>
       <div className={styles.composedInput}>
@@ -53,7 +37,10 @@ function Form() {
           className={styles.input}
           type="text"
           id="classes"
-          onChange={(e) => setClasses(e.target.value)}
+          placeholder="高一(1)班"
+          onChange={(e) => {
+            setClasses(e.target.value);
+          }}
         />
       </div>
       <div className={styles.composedInput}>
@@ -62,13 +49,24 @@ function Form() {
           className={styles.input}
           type="email"
           id="email"
-          onChange={(e) => setEmail(e.target.value)}
+          placeholder="12345678@nb.com"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
         />
       </div>
       <button
-        className={clsx("button button--primary", styles.button)}
+        className={clsx("button button--primary", styles.submitButton)}
         type="submit"
+        disabled={
+          name.length === 0 ||
+          classes.length === 0 ||
+          email.length === 0 ||
+          status === 1 ||
+          status === 2
+        }
         onClick={(e) => {
+          setStatus(1);
           const data = {
             name: name,
             classes: classes,
@@ -83,17 +81,18 @@ function Form() {
           })
             .then((response) => {
               if (response.ok) {
+                setStatus(2);
                 return response.text();
               } else {
+                setStatus(3);
                 throw new Error("Network response was not ok");
               }
             })
             .catch((error) => {
               console.error(error);
             });
-          //upload(JSON.stringify(data));
         }}>
-        提交
+        {statusTexts[status]}
       </button>
     </div>
   );
