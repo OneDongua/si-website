@@ -13,4 +13,5 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     await context.env.PART_LIST.put(body.timestamp, body.data);
     return new Response("ok");
   }
+  return new Response("Hello World!");
 };

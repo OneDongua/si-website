@@ -27,7 +27,7 @@ async function upload(data: string) {
       console.log("Success:", data);
     })
     .catch((error) => {
-      console.error("Error:", error);
+      console.error(error);
     });
 }
 // TODO 状态显示
