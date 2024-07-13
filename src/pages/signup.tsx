@@ -78,10 +78,13 @@ function Form() {
           };
           fetch("/api/signupHandler", {
             method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
             body: JSON.stringify({ timestamp: Date.now(), data: data }),
           })
             .then((response) => {
-              return response.json();
+              return response.text();
             })
             .then((data) => {
               console.log(data);
