@@ -5,8 +5,7 @@ import styles from "./signup.module.css";
 import clsx from "clsx";
 
 async function upload(data: string) {
-  const url =
-    "https://cors-anywhere.herokuapp.com/https://dav.jianguoyun.com/dav/test/test.json";
+  const url = "https://dav.jianguoyun.com/dav/test/test.json";
 
   await fetch(url, {
     method: "PUT",
@@ -30,7 +29,6 @@ async function upload(data: string) {
       console.error(error);
     });
 }
-// TODO 状态显示
 
 function Form() {
   const [name, setName] = useState("");
@@ -84,10 +82,11 @@ function Form() {
             body: JSON.stringify({ timestamp: Date.now(), data: data }),
           })
             .then((response) => {
-              return response.text();
-            })
-            .then((data) => {
-              console.log(data);
+              if (response.ok) {
+                return response.text();
+              } else {
+                throw new Error("Network response was not ok");
+              }
             })
             .catch((error) => {
               console.error(error);
