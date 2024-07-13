@@ -8,19 +8,21 @@ async function upload(data: string) {
   const url =
     "https://cors-anywhere.herokuapp.com/https://dav.jianguoyun.com/dav/test/test.json";
 
-  const username = "875658697@qq.com";
-  const password = "a2p7cfgct2yfuhr8";
-  const basicAuth = btoa(`${username}:${password}`);
-
   await fetch(url, {
     method: "PUT",
     headers: {
       "Content-Type": "text/plain",
-      Authorization: "Basic " + basicAuth,
+      Authorization: "Basic ODc1NjU4Njk3QHFxLmNvbTphMnA3Y2ZnY3QyeWZ1aHI4", // 个人密钥
     },
     body: data,
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.ok) {
+        return response.text();
+      } else {
+        throw new Error("Network response was not ok");
+      }
+    })
     .then((data) => {
       console.log("Success:", data);
     })
@@ -28,6 +30,7 @@ async function upload(data: string) {
       console.error("Error:", error);
     });
 }
+// TODO 状态显示
 
 function Form() {
   const [name, setName] = useState("");
