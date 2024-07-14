@@ -1,7 +1,7 @@
 import Layout from "@theme/Layout";
 import { useState } from "react";
 
-import styles from "./sign_up.module.css";
+import styles from "./styles/sign_up.module.css";
 import clsx from "clsx";
 function Form() {
   const [name, setName] = useState("");
