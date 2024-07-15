@@ -4,61 +4,57 @@ sidebar_position: 2
 
 # mdx格式示例
 
----
+# Markdown 功能
 
-# Markdown Features
+Docusaurus 支持 **[Markdown](https://daringfireball.net/projects/markdown/syntax)** 和一些 **附加特性**。
 
-Docusaurus supports **[Markdown](https://daringfireball.net/projects/markdown/syntax)** and a few **additional features**.
+## 前置元数据
 
-## Front Matter
-
-Markdown documents have metadata at the top called [Front Matter](https://jekyllrb.com/docs/front-matter/):
-
+Markdown 文档顶部有称为 [前置元数据](https://jekyllrb.com/docs/front-matter/) 的元数据：
 ```text title="my-doc.md"
 // highlight-start
 ---
 id: my-doc-id
-title: My document title
-description: My document description
+title: 我的文档标题
+description: 我的文档描述
 slug: /my-custom-url
 ---
 // highlight-end
+```
 
+## 提示和警告
 
-## Admonitions
-
-Docusaurus has a special syntax to create admonitions and callouts:
+Docusaurus 有一种特殊的语法来创建提示和警告：
 
 ```md
 :::tip My tip
 
-Use this awesome feature option
+使用这个超棒的功能选项
 
 :::
 
-:::danger Take care
+:::danger 小心
 
-This action is dangerous
+这个动作很危险
 
 :::
 ```
 
 :::tip My tip
 
-Use this awesome feature option
+使用这个超棒的功能选项!
 
 :::
 
-:::danger Take care
+:::danger 小心
 
-This action is dangerous
+这个动作很危险!
 
 :::
 
-## MDX and React Components
+## MDX 和 React 组件
 
-[MDX](https://mdxjs.com/) can make your documentation more **interactive** and allows using any **React components inside Markdown**:
-
+[MDX](https://mdxjs.com/) 可以使你的文档更具 **交互性** 并且允许在 **Markdown** 中使用任何 **React 组件**：
 ```jsx
 export const Highlight = ({children, color}) => (
   <span
@@ -70,33 +66,33 @@ export const Highlight = ({children, color}) => (
       cursor: 'pointer',
     }}
     onClick={() => {
-      alert(`You clicked the color ${color} with label ${children}`)
+      alert(`您点击了颜色 ${color}，标签为 ${children}`);
     }}>
     {children}
   </span>
 );
 
-This is <Highlight color="#25c2a0">Docusaurus green</Highlight> !
+这是 <Highlight color="#25c2a0">Docusaurus 绿</Highlight> !
 
-This is <Highlight color="#1877F2">Facebook blue</Highlight> !
+这是 <Highlight color="#1877F2">Facebook 蓝</Highlight> !
 ```
 
 export const Highlight = ({ children, color }) => (
   <span
     style={{
       backgroundColor: color,
-      borderRadius: "20px",
-      color: "#fff",
-      padding: "10px",
-      cursor: "pointer",
+      borderRadius: '20px',
+      color: '#fff',
+      padding: '10px',
+      cursor: 'pointer',
     }}
     onClick={() => {
-      alert(`You clicked the color ${color} with label ${children}`);
+      alert(`您点击了颜色 ${color}，标签为 ${children}`);
     }}>
     {children}
   </span>
 );
 
-This is <Highlight color="#25c2a0">Docusaurus green</Highlight> !
+这是 <Highlight color="#25c2a0">Docusaurus 绿</Highlight> !
 
-This is <Highlight color="#1877F2">Facebook blue</Highlight> !
+这是 <Highlight color="#1877F2">Facebook 蓝</Highlight> !
