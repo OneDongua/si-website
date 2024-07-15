@@ -34,12 +34,17 @@ const config: Config = {
     [
       "classic",
       {
-        docs: false,
+        docs: {
+          sidebarPath: "./sidebars.ts",
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          editUrl: "https://github.com/Onedongua/si-website/tree/main/",
+        },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: "https://github.com/Onedongua/si-website/tree/main",
+          editUrl: "https://github.com/Onedongua/si-website/tree/main/",
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -57,6 +62,12 @@ const config: Config = {
       },
       items: [
         { to: "sign_up", label: "🔥报名", position: "left" },
+        {
+          type: "docSidebar",
+          sidebarId: "tutorialSidebar",
+          position: "left",
+          label: "文档",
+        },
         { to: "/blog", label: "Blog", position: "left" },
         { to: "about_us", label: "关于", position: "right" },
         {

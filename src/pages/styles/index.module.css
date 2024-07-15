@@ -23,7 +23,7 @@
   justify-content: center;
 }
 
-main {
+.broad {
   display: flex;
   flex-direction: row;
   align-items: center;
