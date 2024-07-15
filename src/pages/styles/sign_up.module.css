@@ -4,7 +4,7 @@
   padding: 1rem;
   height: 100vh;
   min-height: 432px;
-  background-image: url("/img/docusaurus-social-card.jpg");
+  background-image: url("/img/bg_1.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -16,7 +16,8 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 24rem;
+  width: 32%;
+  min-width: 360px;
 }
 
 .title {
