@@ -4,9 +4,8 @@ sidebar_position: 1
 
 # md格式示例
 
----
-
 # Markdown 教程
+基础 Markdown 语法教学
 
 ## 1. 标题
 ```
