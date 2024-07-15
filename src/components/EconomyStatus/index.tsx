@@ -28,7 +28,6 @@ function EconomyStatus() {
     tooltip: {
       trigger: "item",
       formatter: (params) => {
-        console.log(params);
         return `
         <b style="font-size:14px;">${params.seriesName}</b>
         <br>

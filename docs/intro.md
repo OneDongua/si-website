@@ -4,4 +4,4 @@ sidebar_position: 1
 
 # 引言
 
-致敬传奇耐删王docs
+这是智能信息社的文档库。

@@ -1,3 +1,15 @@
+.background {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  height: 100vh;
+  min-height: 432px;
+  background-image: url("/img/docusaurus-social-card.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .card {
   margin: auto;
   padding: 2rem;
@@ -35,16 +47,6 @@
   height: 40px;
   //max-width: 80px;
   align-self: flex-end;
-}
-
-.background {
-  display: flex;
-  height: 100vh;
-  min-height: 432px;
-  background-image: url("/img/docusaurus-social-card.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .hidden {
