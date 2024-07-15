@@ -1,8 +1,12 @@
-import Layout from "@theme/Layout";
+import clsx from "clsx";
 import { useState } from "react";
 
+import Layout from "@theme/Layout";
+
 import styles from "./styles/sign_up.module.css";
-import clsx from "clsx";
+
+let masterSwitch = false; // 总开关，true为开启，false为关闭
+
 function Form() {
   const [name, setName] = useState("");
   const [classes, setClasses] = useState("");
@@ -26,6 +30,7 @@ function Form() {
           type="text"
           id="name"
           placeholder="李华"
+          disabled={!masterSwitch}
           onChange={(e) => {
             setName(e.target.value);
           }}
@@ -38,6 +43,7 @@ function Form() {
           type="text"
           id="classes"
           placeholder="高一(1)班"
+          disabled={!masterSwitch}
           onChange={(e) => {
             setClasses(e.target.value);
           }}
@@ -49,7 +55,8 @@ function Form() {
           className={styles.input}
           type="email"
           id="email"
-          placeholder="12345678@nb.com"
+          placeholder="123456789@qq.com"
+          disabled={!masterSwitch}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -63,7 +70,8 @@ function Form() {
           classes.length === 0 ||
           email.length === 0 ||
           status === 1 ||
-          status === 2
+          status === 2 ||
+          !masterSwitch
         }
         onClick={(e) => {
           setStatus(1);
@@ -101,6 +109,9 @@ export default function Signup() {
   return (
     <Layout title="报名">
       <div className={styles.background}>
+        {!masterSwitch && (
+          <b className="alert alert--danger">❌ 暂未开放报名</b>
+        )}
         <Form />
       </div>
     </Layout>
