@@ -68,7 +68,7 @@ const config: Config = {
           position: "left",
           label: "文档",
         },
-        { to: "/blog", label: "Blog", position: "left" },
+        { to: "/blog", label: "博客", position: "left" },
         { to: "about_us", label: "关于", position: "right" },
         {
           href: "https://github.com/OneDongua/si-website",
@@ -94,14 +94,14 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} 惠州一中智能信息社. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} 惠州一中智能信息社. Built with Docusaurus. Powered by Cloudflare Pages.`,
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
     colorMode: {
-      defaultMode: 'light',
+      defaultMode: "light",
       disableSwitch: false,
       respectPrefersColorScheme: true,
     },
