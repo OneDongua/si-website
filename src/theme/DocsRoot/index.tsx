@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 
 import type { Props } from "@theme/DocVersionRoot";
 
-let masterSwitch = true; // 文档总开关，true为开启，false为关闭
+let masterSwitch = true; // 文档查看总开关，true为开启，false为关闭
 
 function accessDeny() {
   return (
