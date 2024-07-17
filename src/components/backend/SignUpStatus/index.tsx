@@ -5,7 +5,7 @@ import styles from "./index.module.css";
 
 async function getData() {
   let mData = {};
-  fetch("/api/SignUpHandler?timestamp=" + Date.now().toString(), {
+  await fetch("/api/SignUpHandler?timestamp=" + Date.now().toString(), {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -19,7 +19,6 @@ async function getData() {
       }
     })
     .then((data) => {
-      console.log(data);
       mData = data;
     })
     .catch((error) => {
