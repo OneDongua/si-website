@@ -1,6 +1,6 @@
 .background {
-  padding: 0.5rem 0 0.5rem 0.5rem;
-  scrollbar-gutter: stable;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  //scrollbar-gutter: stable;
   overflow-x: hidden;
 }
 

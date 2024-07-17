@@ -4,7 +4,13 @@ import { useEffect, useState } from "react";
 import styles from "./index.module.css";
 
 async function getData() {
-  let mData = {};
+  let mData = {} && {
+    "1720944555451": {
+      name: "李华",
+      classes: "高一（1）班",
+      email: "123456789@qq.com",
+    },
+  }; // 测试数据
   await fetch("/api/SignUpHandler?timestamp=" + Date.now().toString(), {
     method: "GET",
     headers: {
@@ -32,14 +38,14 @@ export default function SignUpStatus() {
     const timeout = setTimeout(async () => {
       const mData = await getData();
       setData(mData);
-    }, 500);
+    }, 200);
 
     return () => clearTimeout(timeout);
   }, []);
 
   return (
-    <div className={"card shadow--md padding--md"}>
-      <table>
+    <div className={clsx("card shadow--md", styles.card)}>
+      <table className={styles.table}>
         <caption className="hero__subtitle text--bold padding--sm">
           报名人员
         </caption>
