@@ -7,7 +7,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     let body = await context.request.json();
 
     if (!body) {
-      return new Response("Error", { status: 400 });
+      return new Response("Error: no request body.", { status: 400 });
     }
 
     await context.env.PART_LIST.put(
@@ -20,12 +20,10 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     const params = url.searchParams;
     const timestamp = params.get("timestamp");
 
-    if (timestamp && Date.now() - parseInt(timestamp) < 20000) {
-      const data = await context.env.PART_LIST;
-      console.log(data);
-      const keys = data && data.list().keys;
-      if (keys) return new Response(keys);
+    if (timestamp && Date.now() - parseInt(timestamp) < 10000) {
+      const data = await context.env.PART_LIST.list();
+      return new Response(data.keys);
     }
   }
-  return new Response("Error", { status: 400 });
+  return new Response("Error: unknown error", { status: 400 });
 };
