@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "./index.module.css";
 
 async function getData() {
-  let data = {};
+  let mData = {};
   fetch("/api/SignUpHandler?timestamp=" + Date.now().toString(), {
     method: "GET",
     headers: {
@@ -19,12 +19,12 @@ async function getData() {
       }
     })
     .then((data) => {
-      this.data = data;
+      mData = data;
     })
     .catch((error) => {
       console.error(error);
     });
-  return data;
+  return mData;
 }
 export default function SignUpStatus() {
   const [data, setData] = useState(null);
