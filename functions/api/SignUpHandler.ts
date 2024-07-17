@@ -22,11 +22,26 @@ export const onRequest: PagesFunction<Env> = async (context) => {
 
     if (timestamp && Date.now() - parseInt(timestamp) < 10000) {
       const keys = await context.env.PART_LIST.list().keys;
-      const data = {};
-      for (const key of keys) {
-        const value = await context.env.PART_LIST.get(key.name);
-        data[key.name] = JSON.parse(value);
-      }
+      const getValuePromises = keys.map(async (key) => {
+        try {
+          const value = await context.env.PART_LIST.get(key.name);
+          return {
+            key: key.name,
+            value: JSON.parse(value),
+          };
+        } catch (error) {
+          console.error(`Error parsing JSON for key ${key.name}:`, error);
+          return null;
+        }
+      });
+
+      const values = await Promise.all(getValuePromises);
+      // 过滤掉可能因错误而返回的null值
+      const validValues = values.filter(Boolean);
+      const data = validValues.reduce(
+        (acc, { key, value }) => ({ ...acc, [key]: value }),
+        {}
+      );
 
       return new Response(JSON.stringify(data));
     }
