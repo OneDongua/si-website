@@ -21,7 +21,8 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     const timestamp = params.get("timestamp");
 
     if (timestamp && Date.now() - parseInt(timestamp) < 10000) {
-      const keys: any = await context.env.PART_LIST.list().keys;
+      const list = await context.env.PART_LIST.list();
+      const keys = list.keys;
       try {
         const data = {};
         for (const key of keys) {
