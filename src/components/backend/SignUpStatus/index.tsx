@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useState } from "react";
 
 import styles from "./index.module.css";
 
@@ -26,8 +27,9 @@ async function getData() {
   return data;
 }
 export default function SignUpStatus() {
-  const data = getData();
-  const keys = Object.keys(data);
+  const [data, setData] = useState({});
+  setData(getData());
+
   return (
     <div className={"card shadow--md padding--md"}>
       <table>
@@ -43,7 +45,7 @@ export default function SignUpStatus() {
           </tr>
         </thead>
         <tbody>
-          {keys.map((key) => {
+          {Object.keys(data).map((key) => {
             return (
               <tr>
                 <th scope="row">{data[key].name}</th>
@@ -59,7 +61,7 @@ export default function SignUpStatus() {
             <th scope="row" colSpan={3}>
               总计
             </th>
-            <td>{keys.length}</td>
+            <td>{Object.keys(data).length}</td>
           </tr>
         </tfoot>
       </table>
