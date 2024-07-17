@@ -12,7 +12,7 @@ function getList() {
   })
     .then((response) => {
       if (response.ok) {
-        list.push(response.json());
+        list.push(JSON.stringify(response.json()));
       } else {
         throw new Error("Network response was not ok");
       }
