@@ -22,6 +22,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
 
     if (timestamp && Date.now() - parseInt(timestamp) < 20000) {
       const data = await context.env.PART_LIST;
+      console.log(data);
       const keys = data && data.list().keys;
       if (keys) return new Response(keys);
     }
