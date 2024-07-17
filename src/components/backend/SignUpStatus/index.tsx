@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "./index.module.css";
 
@@ -28,7 +28,13 @@ async function getData() {
 }
 export default function SignUpStatus() {
   const [data, setData] = useState(null);
-  setData(getData());
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setData(getData());
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <div className={"card shadow--md padding--md"}>
