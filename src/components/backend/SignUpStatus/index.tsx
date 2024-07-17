@@ -3,7 +3,7 @@ import clsx from "clsx";
 import styles from "./index.module.css";
 
 function getList() {
-  const list = [];
+  let list;
   fetch("/api/SignUpHandler?timestamp=" + Date.now().toString(), {
     method: "GET",
     headers: {
@@ -12,7 +12,7 @@ function getList() {
   })
     .then((response) => {
       if (response.ok) {
-        list.push(JSON.stringify(response.json()));
+        list = response.json();
       } else {
         throw new Error("Network response was not ok");
       }
