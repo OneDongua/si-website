@@ -22,7 +22,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
 
     if (timestamp && Date.now() - parseInt(timestamp) < 10000) {
       const data = await context.env.PART_LIST.list();
-      return new Response(data.keys);
+      return new Response(JSON.stringify(data.keys));
     }
   }
   return new Response("Error: unknown error", { status: 400 });
