@@ -8,7 +8,7 @@ interface Member {
   blogUrl?: string;
 }
 
-let members: Member[] = [
+const members: Member[] = [
   {
     id: 0,
     name: "李华",

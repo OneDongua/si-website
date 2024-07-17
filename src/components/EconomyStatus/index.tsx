@@ -24,7 +24,7 @@ function EconomyStatus() {
     LabelLayout,
     TitleComponent,
   ]);
-  let option = {
+  const option = {
     title: {
       text: "经费",
       subtext: "经费情况",

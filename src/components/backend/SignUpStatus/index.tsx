@@ -11,6 +11,7 @@ function getList() {
   })
     .then((response) => {
       if (response.ok) {
+        console.log("response: ", response);
         return response.json();
       } else {
         throw new Error("Network response was not ok");

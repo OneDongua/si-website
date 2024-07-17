@@ -4,7 +4,7 @@ interface Env {
 
 export const onRequest: PagesFunction<Env> = async (context) => {
   if (context.request.method === "POST") {
-    let body = await context.request.json();
+    const body = await context.request.json();
 
     if (!body) {
       return new Response("Error: no request body.", { status: 400 });
@@ -21,8 +21,14 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     const timestamp = params.get("timestamp");
 
     if (timestamp && Date.now() - parseInt(timestamp) < 10000) {
-      const data = await context.env.PART_LIST.list();
-      return new Response(JSON.stringify(data.keys));
+      const keys = await context.env.PART_LIST.list().keys;
+      const data = {};
+      for (const key of keys) {
+        const value = await context.env.PART_LIST.get(key.name);
+        data[key.name] = JSON.parse(value);
+      }
+
+      return new Response(JSON.stringify(data));
     }
   }
   return new Response("Error: unknown error", { status: 400 });

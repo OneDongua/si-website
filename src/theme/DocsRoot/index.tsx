@@ -2,14 +2,17 @@ import clsx from "clsx";
 import React from "react";
 
 import renderRoutes from "@docusaurus/renderRoutes";
-import { HtmlClassNameProvider, ThemeClassNames } from "@docusaurus/theme-common";
+import {
+  HtmlClassNameProvider,
+  ThemeClassNames,
+} from "@docusaurus/theme-common";
 import Layout from "@theme/Layout";
 
 import styles from "./styles.module.css";
 
 import type { Props } from "@theme/DocVersionRoot";
 
-let masterSwitch = true; // 文档查看总开关，true为开启，false为关闭
+const masterSwitch = true; // 文档查看总开关，true为开启，false为关闭
 
 function accessDeny() {
   return (

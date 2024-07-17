@@ -5,7 +5,7 @@ import Layout from "@theme/Layout";
 
 import styles from "./styles/sign_up.module.css";
 
-let masterSwitch = false; // 总开关，true为开启，false为关闭
+const masterSwitch = false; // 总开关，true为开启，false为关闭
 
 function Form() {
   const [name, setName] = useState("");
@@ -13,7 +13,7 @@ function Form() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState(0);
 
-  let statusTexts = {
+  const statusTexts = {
     0: "提交",
     1: "提交中…",
     2: "提交成功",
