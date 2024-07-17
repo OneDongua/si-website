@@ -19,6 +19,7 @@ async function getData() {
       }
     })
     .then((data) => {
+      console.log(data);
       mData = data;
     })
     .catch((error) => {
