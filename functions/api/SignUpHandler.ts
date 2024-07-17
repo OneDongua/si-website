@@ -2,12 +2,6 @@ interface Env {
   PART_LIST: KVNamespace;
 }
 
-interface List {
-  keys: any;
-  list_complete: boolean;
-  cursor: string;
-}
-
 export const onRequest: PagesFunction<Env> = async (context) => {
   if (context.request.method === "POST") {
     let body = await context.request.json();
@@ -27,8 +21,9 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     const timestamp = params.get("timestamp");
 
     if (timestamp && Date.now() - parseInt(timestamp) < 20000) {
-      const list: List = await context.env.PART_LIST.list();
-      return new Response(list.keys);
+      const data = await context.env.PART_LIST;
+      const keys = data.list() && data.list().keys;
+      if (keys) return new Response(keys);
     }
   }
   return new Response("Error", { status: 400 });
