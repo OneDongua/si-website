@@ -88,6 +88,15 @@ const config: Config = {
       style: "light",
       links: [
         {
+          title: "管理",
+          items: [
+            {
+              label: "后台入口",
+              to: "backend",
+            },
+          ],
+        },
+        {
           title: "一些东西",
           items: [
             {

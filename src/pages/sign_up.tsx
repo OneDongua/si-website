@@ -80,7 +80,7 @@ function Form() {
             classes: classes,
             email: email,
           };
-          fetch("/api/SignupHandler", {
+          fetch("/api/SignUpHandler", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

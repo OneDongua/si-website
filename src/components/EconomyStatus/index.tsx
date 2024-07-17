@@ -1,6 +1,11 @@
+import clsx from "clsx";
 import ReactEChartsCore from "echarts-for-react/lib/core";
 import { PieChart } from "echarts/charts";
-import { LegendComponent, TitleComponent, TooltipComponent } from "echarts/components";
+import {
+  LegendComponent,
+  TitleComponent,
+  TooltipComponent,
+} from "echarts/components";
 import * as echarts from "echarts/core";
 import { LabelLayout } from "echarts/features";
 import { CanvasRenderer } from "echarts/renderers";
@@ -8,7 +13,7 @@ import { useEffect, useState } from "react";
 
 import { useColorMode } from "@docusaurus/theme-common";
 
-import "./index.css";
+import styles from "./index.module.css";
 
 function EconomyStatus() {
   echarts.use([
@@ -136,7 +141,7 @@ function EconomyStatus() {
   }, [colorMode]);
 
   return (
-    <div className="card shadow--md statuCard" id="card">
+    <div className={clsx("card shadow--md", styles.statusCard)} id="card">
       <ReactEChartsCore
         echarts={echarts}
         option={option}

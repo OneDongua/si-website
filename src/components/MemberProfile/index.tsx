@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import "./index.css";
+import styles from "./index.module.css";
 
 function MemberProfile({
   className,
@@ -22,7 +22,7 @@ function MemberProfile({
   blogUrl?: string;
 }) {
   return (
-    <div className={clsx("column", className)}>
+    <div className={clsx(styles.column, className)}>
       <div className="card card--full-height shadow--md">
         <div className="card__header">
           <div className="avatar">

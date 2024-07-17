@@ -1,0 +1,30 @@
+.background {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  transition: transform var(--ifm-transition-fast) ease;
+}
+
+.content {
+  flex: 1 0 auto;
+  display: flex;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  padding-top: calc(-1 * var(--ifm-navbar-height));
+  border-right: 1px solid var(--ifm-toc-border-color);
+  will-change: width;
+  clip-path: inset(0);
+}
+
+.main {
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+}

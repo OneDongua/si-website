@@ -9,7 +9,9 @@
 #### 0. 安装软件
 
 - [Git](https://git-scm.com/downloads)
+
 - [Node.js](https://nodejs.org/zh-cn)
+
 - [VSCode](https://code.visualstudio.com/)
   (没有中文？扩展中安装简体中文扩展即可)
 
