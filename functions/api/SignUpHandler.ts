@@ -20,11 +20,10 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     const params = url.searchParams;
     const timestamp = params.get("timestamp");
 
-    if (timestamp) {
-      return new Response(JSON.stringify(await context.env.PART_LIST.list()));
+    if (timestamp && Date.now() - parseInt(timestamp) < 20000) {
+      const list = await context.env.PART_LIST.list();
+      return new Response(list.keys);
     }
-
-    return new Response("Error", { status: 400 });
   }
-  return new Response("Hello World!");
+  return new Response("Error", { status: 400 });
 };
