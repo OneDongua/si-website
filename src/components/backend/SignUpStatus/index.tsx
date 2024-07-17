@@ -2,8 +2,8 @@ import clsx from "clsx";
 
 import styles from "./index.module.css";
 
-function getData() {
-  let data: any = {};
+async function getData() {
+  let data = {};
   fetch("/api/SignUpHandler?timestamp=" + Date.now().toString(), {
     method: "GET",
     headers: {
