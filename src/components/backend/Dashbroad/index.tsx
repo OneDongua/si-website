@@ -2,7 +2,7 @@ import SignUpStatus from "../SignUpStatus";
 
 export default function Dashbroad() {
   return (
-    <div>
+    <div className="padding--lg">
       <SignUpStatus />
     </div>
   );
