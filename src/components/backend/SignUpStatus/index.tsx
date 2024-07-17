@@ -30,8 +30,8 @@ async function getData() {
 export default function SignUpStatus() {
   const [data, setData] = useState(null);
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      const mData = getData();
+    const timeout = setTimeout(async () => {
+      const mData = await getData();
       setData(mData);
     }, 500);
 
