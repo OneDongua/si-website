@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import styles from "./index.module.css";
 
-async function getData() {
+function getData() {
   let mData = {};
   fetch("/api/SignUpHandler?timestamp=" + Date.now().toString(), {
     method: "GET",
@@ -30,7 +30,10 @@ export default function SignUpStatus() {
   const [data, setData] = useState(null);
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setData(getData());
+      async () => {
+        const mData = getData();
+        setData(mData);
+      };
     }, 500);
 
     return () => clearTimeout(timeout);
