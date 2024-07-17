@@ -27,7 +27,7 @@ async function getData() {
   return data;
 }
 export default function SignUpStatus() {
-  const [data, setData] = useState({});
+  const [data, setData] = useState(null);
   setData(getData());
 
   return (
@@ -45,23 +45,24 @@ export default function SignUpStatus() {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(data).map((key) => {
-            return (
-              <tr>
-                <th scope="row">{data[key].name}</th>
-                <td>{data[key].classes}</td>
-                <td>{data[key].email}</td>
-                <td>{new Date(Number.parseInt(key)).toLocaleString()}</td>
-              </tr>
-            );
-          })}
+          {data &&
+            Object.keys(data).map((key) => {
+              return (
+                <tr>
+                  <th scope="row">{data[key].name}</th>
+                  <td>{data[key].classes}</td>
+                  <td>{data[key].email}</td>
+                  <td>{new Date(Number.parseInt(key)).toLocaleString()}</td>
+                </tr>
+              );
+            })}
         </tbody>
         <tfoot>
           <tr>
             <th scope="row" colSpan={3}>
               总计
             </th>
-            <td>{Object.keys(data).length}</td>
+            <td>{data && Object.keys(data).length}</td>
           </tr>
         </tfoot>
       </table>
