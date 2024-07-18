@@ -33,14 +33,13 @@
 }
 
 @media (max-width: 640px) {
-  .sidebar[data-show="false"] {
+  .sidebar {
     position: fixed;
+  }
+  .sidebar[data-show="false"] {
     transform: translate3d(-100%, 0, 0);
   }
   .sidebar[data-show="true"] {
-    position: fixed;
-    top: var(--ifm-navbar-height);
-    bottom: 0;
     transform: translate3d(0, 0, 0);
   }
 
@@ -87,6 +86,12 @@
   bottom: 0;
   border-radius: 50%;
   cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .logout {
+    bottom: var(--ifm-navbar-height);
+  }
 }
 
 .logout:hover {
