@@ -18,13 +18,15 @@ async function check(email: string, password: string) {
       }
     })
     .then((data) => {
-      console.log(data);
       encryptedPassword = data;
     })
     .catch((error) => {
-      console.error(error);
+      throw new Error(error);
     });
-  const bytes = CryptoJS.AES.decrypt(encryptedPassword, "SIWEBSITE1234567");
+
+  if (!encryptedPassword) throw new Error("Error: 未找到用户");
+
+  const bytes = CryptoJS.AES.decrypt(encryptedPassword, "SIWEBSITE1234567"); //明文密钥，不安全
   if (password === bytes.toString(CryptoJS.enc.Utf8)) return true;
 
   return false;
@@ -62,7 +64,15 @@ export default function Login() {
         className={clsx("button button--primary", styles.submitButton)}
         type="submit"
         onClick={async (e) => {
-          if (await check(email, password)) console.log("登录成功");
+          try {
+            if (await check(email, password)) {
+              console.log("登录成功");
+            } else {
+              console.log("账号或密码错误");
+            }
+          } catch (error) {
+            console.log(error);
+          }
         }}>
         登录
       </button>
