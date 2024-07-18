@@ -2,9 +2,9 @@ import clsx from "clsx";
 import React from "react";
 import { useCookies } from "react-cookie";
 
+import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
 import renderRoutes from "@docusaurus/renderRoutes";
 import { HtmlClassNameProvider, ThemeClassNames } from "@docusaurus/theme-common";
-import useIsBrowser from "@docusaurus/useIsBrowser";
 import Layout from "@theme/Layout";
 
 import styles from "./styles.module.css";
@@ -19,24 +19,22 @@ function accessDeny() {
 }
 
 export default function DocsRoot(props: Props): JSX.Element {
-  const isBrowser = useIsBrowser();
-  if (!isBrowser) {
+  if (ExecutionEnvironment.canUseDOM) {
+    const [cookies, setCookie, removeCookie] = useCookies();
+    const isLogon = cookies.email;
     return (
       <HtmlClassNameProvider
         className={clsx(ThemeClassNames.wrapper.docsPages)}>
-        <Layout>{renderRoutes(props.route.routes)}</Layout>
+        <Layout>
+          {isLogon ? renderRoutes(props.route.routes) : accessDeny()}
+        </Layout>
       </HtmlClassNameProvider>
     );
   }
 
-  const [cookies, setCookie, removeCookie] = useCookies();
-  const isLogon = cookies.email;
-
   return (
     <HtmlClassNameProvider className={clsx(ThemeClassNames.wrapper.docsPages)}>
-      <Layout>
-        {isLogon ? renderRoutes(props.route.routes) : accessDeny()}
-      </Layout>
+      <Layout>{renderRoutes(props.route.routes)}</Layout>
     </HtmlClassNameProvider>
   );
 }
