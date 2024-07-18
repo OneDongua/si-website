@@ -92,7 +92,7 @@ const config: Config = {
           items: [
             {
               label: "后台入口",
-              to: "/backend",
+              to: "backend",
             },
           ],
         },
