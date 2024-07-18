@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import ReactEChartsCore from "echarts-for-react/lib/core";
 import { PieChart } from "echarts/charts";
 import {
@@ -12,7 +13,7 @@ import { useEffect, useState } from "react";
 
 import { useColorMode } from "@docusaurus/theme-common";
 
-import "./index.css";
+import styles from "./index.module.css";
 
 function EconomyStatus() {
   echarts.use([
@@ -23,7 +24,7 @@ function EconomyStatus() {
     LabelLayout,
     TitleComponent,
   ]);
-  let option = {
+  const option = {
     title: {
       text: "经费",
       subtext: "经费情况",
@@ -136,7 +137,7 @@ function EconomyStatus() {
   }, [colorMode]);
 
   return (
-    <div className="card shadow--md statuCard" id="card">
+    <div className={clsx("card shadow--md", styles.statusCard)} id="card">
       <ReactEChartsCore
         echarts={echarts}
         option={option}

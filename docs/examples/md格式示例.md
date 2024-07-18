@@ -83,13 +83,13 @@ sidebar_position: 1
 
 ## 5. 超链接和图片
 ```
-[超链接描述](https://m.bilibili.com)
-![图片描述](https://static.coolapk.com/static/web/v8/images/coolapklogo.png)
+[超链接描述](https://www.bilibili.com)
+![图片描述](/img/logo.png)
 ```
 
-[超链接描述](https://m.bilibili.com)
+[超链接描述](https://www.bilibili.com)
 
-![图片描述](https://static.coolapk.com/static/web/v8/images/coolapklogo.png)
+![图片描述](/img/logo.png)
 
 ---
 
@@ -144,10 +144,8 @@ print("Hello World!")
 星号：\*
 下划线：\_
 减号：\-
-竖线：\|
-括号：\()
 井号：\#
-斜线：\\
+反斜杠：\\
 尖括号：\<>
 ```
 
@@ -157,13 +155,9 @@ print("Hello World!")
 
 减号：\-
 
-竖线：\|
-
-括号：\()
-
 井号：\#
 
-斜线：\\
+反斜杠：\\
 
 尖括号：\<>
 

@@ -35,14 +35,15 @@ const config: Config = {
       "classic",
       {
         docs: {
-          sidebarPath: "./sidebars.ts",
-          // Please change this to your repo.
+          exclude: ["**/*.test.*"],
           // Remove this to remove the "edit this page" links.
           editUrl: "https://github.com/Onedongua/si-website/tree/main/",
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
+          blogSidebarTitle: "所有博客",
+          blogSidebarCount: "ALL",
+          sortPosts: "descending", // "ascending" 升序 / "descending" 降序
           // Remove this to remove the "edit this page" links.
           editUrl: "https://github.com/Onedongua/si-website/tree/main/",
         },
@@ -56,6 +57,7 @@ const config: Config = {
   themeConfig: {
     navbar: {
       title: "智能信息社",
+      hideOnScroll: true,
       logo: {
         alt: "Logo",
         src: "img/logo.png",
@@ -63,13 +65,19 @@ const config: Config = {
       items: [
         { to: "sign_up", label: "🔥报名", position: "left" },
         {
-          type: "docSidebar",
-          sidebarId: "tutorialSidebar",
+          type: "doc",
+          docId: "intro",
           position: "left",
           label: "文档",
         },
-        //{ to: "/blog", label: "Blog", position: "left" },
-        { to: "about_us", label: "关于", position: "right" },
+        { to: "blog", label: "博客", position: "left" },
+        //{ to: "members", label: "成员", position: "left" },
+        {
+          to: "about_us",
+          label: "关于",
+          position: "right",
+        },
+
         {
           href: "https://github.com/OneDongua/si-website",
           className: "header-github-link",
@@ -80,6 +88,15 @@ const config: Config = {
     footer: {
       style: "light",
       links: [
+        {
+          title: "管理",
+          items: [
+            {
+              label: "后台入口",
+              to: "backend",
+            },
+          ],
+        },
         {
           title: "一些东西",
           items: [
@@ -94,7 +111,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} 惠州一中智能信息社. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} 惠州一中智能信息社. Built with Docusaurus. Powered by Cloudflare Pages.`,
     },
     prism: {
       theme: prismThemes.github,

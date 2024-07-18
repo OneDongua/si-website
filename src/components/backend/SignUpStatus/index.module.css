@@ -1,0 +1,9 @@
+.card {
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.table {
+  margin: 0 auto;
+  //overflow-x: auto;
+}

@@ -1,0 +1,19 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% / 4);
+  padding: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .column {
+    margin: 0 auto;
+    width: calc(100% / 2);
+  }
+}
+
+@media (max-width: 640px) {
+  .column {
+    width: 85%;
+  }
+}

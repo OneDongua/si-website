@@ -5,7 +5,7 @@ import Layout from "@theme/Layout";
 
 import styles from "./styles/sign_up.module.css";
 
-let masterSwitch = false; // 总开关，true为开启，false为关闭
+const masterSwitch = false; // 总开关，true为开启，false为关闭
 
 function Form() {
   const [name, setName] = useState("");
@@ -13,7 +13,7 @@ function Form() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState(0);
 
-  let statusTexts = {
+  const statusTexts = {
     0: "提交",
     1: "提交中…",
     2: "提交成功",
@@ -80,7 +80,7 @@ function Form() {
             classes: classes,
             email: email,
           };
-          fetch("/api/signupHandler", {
+          fetch("/api/SignUpHandler", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -110,7 +110,7 @@ export default function Signup() {
     <Layout title="报名">
       <div className={styles.background}>
         {!masterSwitch && (
-          <b className="alert alert--danger">❌ 暂未开放报名</b>
+          <b className="alert alert--danger shadow--md">❌ 暂未开放报名</b>
         )}
         <Form />
       </div>
