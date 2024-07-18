@@ -39,14 +39,25 @@ export default function Login() {
 
   const [cookies, setCookie] = useCookies();
 
+  const params = new URLSearchParams(window.location.search);
+  const jumpto = params.get("jumpto");
+
   const statusTexts = {
     0: "登录",
     1: "登录中…",
+    2: "登录成功",
   };
 
   return (
     <div className={clsx("card shadow--md", styles.card)}>
-      <div className={styles.title}>登录</div>
+      <div
+        className={styles.title}
+        /* onClick={(e) => {
+          setCookie("email", "test", { path: "/" });
+        }} */
+      >
+        登录
+      </div>
       <div className={styles.composedInput}>
         <label htmlFor="email">邮箱:</label>
         <input
@@ -72,18 +83,26 @@ export default function Login() {
       <button
         className={clsx("button button--primary", styles.submitButton)}
         type="submit"
+        disabled={
+          status === 1 ||
+          status === 2 ||
+          email.length === 0 ||
+          password.length === 0
+        }
         onClick={async (e) => {
           setStatus(1);
           try {
             if (await check(email, password)) {
               setCookie("email", email, { path: "/" });
-              console.log("登录成功");
-              window.location.reload();
+              setStatus(2);
+              if (jumpto) {
+                window.location.href = jumpto;
+              }
             } else {
-              console.log("账号或密码错误");
+              alert("账号或密码错误");
             }
           } catch (error) {
-            console.log(error);
+            alert(error);
           }
           setStatus(0);
         }}>

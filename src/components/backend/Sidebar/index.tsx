@@ -36,7 +36,6 @@ export default function Sidebar({ sidebar, setSidebar }) {
           className={styles.logout}
           onClick={(e) => {
             removeCookie("email", { path: "/" });
-            window.location.reload();
           }}>
           <svg height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368">
             <g>

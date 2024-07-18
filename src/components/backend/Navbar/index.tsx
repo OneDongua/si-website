@@ -1,8 +1,10 @@
 import clsx from "clsx";
+import { useCookies } from "react-cookie";
 
 import styles from "./index.module.css";
 
 export default function Navbar({ sidebar, setSidebar }) {
+  const [cookies, setCookie, removeCookie] = useCookies();
   return (
     <nav
       aria-label="主导航"
@@ -31,6 +33,7 @@ export default function Navbar({ sidebar, setSidebar }) {
         </div>
         <div
           className={clsx(styles.navbar__items, styles.navbar__items__right)}>
+          <div className={styles.navbar__item}>{cookies.email}</div>
           <a
             className={clsx(styles.navbar__home)}
             aria-label="返回主页"

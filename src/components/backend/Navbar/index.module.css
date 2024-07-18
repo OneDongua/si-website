@@ -88,14 +88,11 @@ html[data-theme="dark"],
   display: flex;
   flex: 1 1 0%;
   min-width: 0px;
+  user-select: none;
 }
 
 .navbar__brand {
   margin: 0px;
-}
-
-.navbar__items__right {
-  flex: 1 1 0%;
 }
 
 .navbar__items__right {
