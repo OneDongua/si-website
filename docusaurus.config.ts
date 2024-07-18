@@ -71,7 +71,7 @@ const config: Config = {
           label: "文档",
         },
         { to: "blog", label: "博客", position: "left" },
-        { to: "members", label: "成员", position: "left" },
+        //{ to: "members", label: "成员", position: "left" },
         {
           to: "about_us",
           label: "关于",
