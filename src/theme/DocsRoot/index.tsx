@@ -12,7 +12,7 @@ import type { Props } from "@theme/DocVersionRoot";
 function accessDeny() {
   return (
     <div className={clsx(styles.accessDeny, "alert alert--danger")}>
-      ❌ 您没有权限查看该目录 请登录
+      ❌ 您没有权限查看该目录 请<a href="/backend?jumpto=/docs/intro">登录</a>
     </div>
   );
 }
