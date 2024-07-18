@@ -13,27 +13,6 @@
   display: flex;
 }
 
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  padding-top: calc(-1 * var(--ifm-navbar-height));
-  border-right: 1px solid var(--ifm-toc-border-color);
-  will-change: width;
-  clip-path: inset(0);
-}
-
-@media (max-width: 640px) {
-  .sidebar[data-show="false"] {
-    display: none;
-  }
-  .sidebar[data-show="true"] {
-    position: fixed;
-    top: var(--ifm-navbar-height);
-    bottom: 0;
-  }
-}
-
 .main {
   display: flex;
   width: 100%;

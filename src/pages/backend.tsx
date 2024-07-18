@@ -2,29 +2,31 @@ import { useState } from "react";
 import { Route } from "react-router-dom";
 
 import Dashbroad from "../components/backend/Dashbroad";
+import Login from "../components/backend/Login";
 import Navbar from "../components/backend/Navbar";
 import Sidebar from "../components/backend/Sidebar";
 import styles from "./styles/backend.module.css";
 
 function Backend() {
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [isSidebarShow, setIsSidebarShow] = useState(false);
+
+  const isLogin = false;
 
   return (
     <div className={styles.background}>
       <div className={styles.navbar}>
-        <Navbar
-          showSidebar={showSidebar}
-          onShowSidebarChange={setShowSidebar}
-        />
+        <Navbar sidebar={isSidebarShow} setSidebar={setIsSidebarShow} />
       </div>
-      <div className={styles.content}>
-        <aside className={styles.sidebar} data-show={showSidebar}>
-          <Sidebar />
-        </aside>
-        <main className={styles.main}>
-          <Route exact path="" component={Dashbroad} />
-        </main>
-      </div>
+      {isLogin ? (
+        <div className={styles.content}>
+          <Sidebar sidebar={isSidebarShow} setSidebar={setIsSidebarShow} />
+          <main className={styles.main}>
+            <Route exact path="" component={Dashbroad} />
+          </main>
+        </div>
+      ) : (
+        <Login />
+      )}
     </div>
   );
 }

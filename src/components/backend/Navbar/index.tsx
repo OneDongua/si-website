@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 import styles from "./index.module.css";
 
-export default function Navbar({ showSidebar, onShowSidebarChange }) {
+export default function Navbar({ sidebar, setSidebar }) {
   return (
     <nav
       aria-label="主导航"
@@ -13,7 +13,7 @@ export default function Navbar({ showSidebar, onShowSidebarChange }) {
             className={styles.navbar__toggle}
             aria-label="侧边栏"
             onClick={(e) => {
-              onShowSidebarChange(!showSidebar);
+              setSidebar(!sidebar);
             }}>
             <svg height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368">
               <path d="M0 0h24v24H0V0z" fill="none" />
