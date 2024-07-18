@@ -10,21 +10,16 @@ import styles from "./styles/backend.module.css";
 
 function Backend() {
   const [isSidebarShow, setIsSidebarShow] = useState(false);
-  const [isLogon, setIsLogon] = useState(null);
 
-  useEffect(() => {
-    const [cookie] = useCookies();
-    setIsLogon(cookie.email || false);
-  }, []);
+  const [cookie] = useCookies();
+  const isLogon = cookie.email;
 
   return (
     <div className={styles.background}>
       <div className={styles.navbar}>
         <Navbar sidebar={isSidebarShow} setSidebar={setIsSidebarShow} />
       </div>
-      {isLogon == null ? (
-        <div>Loading……</div>
-      ) : isLogon ? (
+      {isLogon ? (
         <div className={styles.content}>
           <Sidebar sidebar={isSidebarShow} setSidebar={setIsSidebarShow} />
           <main className={styles.main}>
