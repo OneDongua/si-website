@@ -1,17 +1,19 @@
 import clsx from "clsx";
 import CryptoJS from "crypto-js";
 import { useState } from "react";
-import { useCookies } from "react-cookie";
 
-import useIsBrowser from "@docusaurus/useIsBrowser";
+import { useHistory } from "@docusaurus/router";
 
 import styles from "./index.module.css";
 
-async function check(email: string, password: string) {
-  let encryptedPassword: string;
-  await fetch("/api/LoginHandler", {
+async function checkAndRegister(email: string, password: string, code: string) {
+  const rightCode = CryptoJS.MD5(email + email).toString();
+  if (code !== rightCode) throw new Error("注册码无效");
+
+  const encryptedPassword = CryptoJS.MD5(password + ":" + email).toString();
+  await fetch("/api/RegisterHandler", {
     method: "POST",
-    body: JSON.stringify({ email: email }),
+    body: JSON.stringify({ email: encryptedPassword }),
   })
     .then((response) => {
       if (response.ok) {
@@ -20,49 +22,37 @@ async function check(email: string, password: string) {
         throw new Error("Network response was not ok");
       }
     })
-    .then((data) => {
-      encryptedPassword = data;
-    })
     .catch((error) => {
       throw new Error(error);
     });
 
-  if (!encryptedPassword) throw new Error("未找到用户");
-
-  const bytes = CryptoJS.AES.decrypt(encryptedPassword, "SIWEBSITE1234567"); //明文密钥，不安全
-  if (password === bytes.toString(CryptoJS.enc.Utf8)) return true;
-
-  return false;
+  return true;
 }
 export default function Login() {
   const [status, setStatus] = useState(0);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [cookies, setCookie] = useCookies();
-
-  const isBrowser = useIsBrowser();
-  let jumpto: string;
-  if (isBrowser) {
-    const params = new URLSearchParams(window.location.search);
-    jumpto = params.get("jumpto");
-  }
+  const [code, setCode] = useState("");
 
   const statusTexts = {
-    0: "登录",
-    1: "登录中…",
-    2: "登录成功",
+    0: "注册",
+    1: "注册中…",
+    2: "注册成功",
   };
+
+  const history = useHistory();
 
   return (
     <div className={clsx("card shadow--md", styles.card)}>
-      <div
-        className={styles.title}
-        /* onClick={(e) => {
-          setCookie("email", "test", { path: "/" });
-        }} */
-      >
-        登录
+      <div className={styles.title}>
+        <a
+          className={styles.title__sub}
+          onClick={(e) => {
+            history.push("/backend/login");
+          }}>
+          登录
+        </a>
+        <div className={styles.title__main}>注册</div>
       </div>
       <div className={styles.composedInput}>
         <label htmlFor="email">邮箱:</label>
@@ -86,6 +76,17 @@ export default function Login() {
           }}
         />
       </div>
+      <div className={styles.composedInput}>
+        <label htmlFor="code">注册码:</label>
+        <input
+          className={styles.input}
+          type="password"
+          id="code"
+          onChange={(e) => {
+            setCode(e.target.value);
+          }}
+        />
+      </div>
       <button
         className={clsx("button button--primary", styles.submitButton)}
         type="submit"
@@ -93,19 +94,14 @@ export default function Login() {
           status === 1 ||
           status === 2 ||
           email.length === 0 ||
-          password.length === 0
+          password.length === 0 ||
+          code.length === 0
         }
         onClick={async (e) => {
           setStatus(1);
           try {
-            if (await check(email, password)) {
-              setCookie("email", email, { path: "/" });
+            if (await checkAndRegister(email, password, code)) {
               setStatus(2);
-              if (jumpto) {
-                window.location.href = jumpto;
-              }
-            } else {
-              alert("账号或密码错误");
             }
           } catch (error) {
             alert(error);
