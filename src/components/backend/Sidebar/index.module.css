@@ -5,6 +5,9 @@
 }
 
 .sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 0.5rem 0;
   height: 100%;
   border-right: 1px solid var(--ifm-toc-border-color);
@@ -73,4 +76,19 @@
 .item__active {
   background: var(--ifm-color-emphasis-200);
   //color: var(--ifm-link-color);
+}
+
+.logout {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+  padding: 0.5rem;
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.logout:hover {
+  background: var(--ifm-color-emphasis-200);
 }
