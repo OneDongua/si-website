@@ -68,7 +68,7 @@ const config: Config = {
           position: "left",
           label: "文档",
         },
-        { to: "/blog", label: "Blog", position: "left" },
+        //{ to: "/blog", label: "Blog", position: "left" },
         { to: "about_us", label: "关于", position: "right" },
         {
           href: "https://github.com/OneDongua/si-website",
@@ -101,7 +101,7 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
     colorMode: {
-      defaultMode: 'light',
+      defaultMode: "light",
       disableSwitch: false,
       respectPrefersColorScheme: true,
     },
