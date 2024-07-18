@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 import { Route } from "react-router-dom";
 
 import Dashbroad from "../components/backend/Dashbroad";
@@ -9,8 +10,9 @@ import styles from "./styles/backend.module.css";
 
 function Backend() {
   const [isSidebarShow, setIsSidebarShow] = useState(false);
+  const [cookie] = useCookies();
 
-  const isLogin = false;
+  const isLogin = cookie.email;
 
   return (
     <div className={styles.background}>
