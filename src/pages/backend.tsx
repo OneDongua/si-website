@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Route } from "react-router-dom";
 
@@ -10,16 +10,21 @@ import styles from "./styles/backend.module.css";
 
 function Backend() {
   const [isSidebarShow, setIsSidebarShow] = useState(false);
+  const [isLogon, setIsLogon] = useState(null);
 
-  const [cookie] = useCookies();
-  const [isLogon, setIsLogon] = useState(cookie.email);
+  useEffect(() => {
+    const [cookie] = useCookies();
+    setIsLogon(cookie.email || false);
+  }, []);
 
   return (
     <div className={styles.background}>
       <div className={styles.navbar}>
         <Navbar sidebar={isSidebarShow} setSidebar={setIsSidebarShow} />
       </div>
-      {isLogon ? (
+      {isLogon == null ? (
+        <div>Loading……</div>
+      ) : isLogon ? (
         <div className={styles.content}>
           <Sidebar sidebar={isSidebarShow} setSidebar={setIsSidebarShow} />
           <main className={styles.main}>
@@ -27,7 +32,7 @@ function Backend() {
           </main>
         </div>
       ) : (
-        <Login setIsLogon={setIsLogon} />
+        <Login />
       )}
     </div>
   );

@@ -32,7 +32,7 @@ async function check(email: string, password: string) {
 
   return false;
 }
-export default function Login({ setIsLogon }) {
+export default function Login() {
   const [status, setStatus] = useState(0);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -78,7 +78,7 @@ export default function Login({ setIsLogon }) {
             if (await check(email, password)) {
               setCookie("email", email, { path: "/" });
               console.log("登录成功");
-              setIsLogon(cookies.email);
+              window.location.reload();
             } else {
               console.log("账号或密码错误");
             }
