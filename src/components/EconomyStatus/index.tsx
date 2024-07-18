@@ -1,6 +1,10 @@
 import ReactEChartsCore from "echarts-for-react/lib/core";
 import { PieChart } from "echarts/charts";
-import { LegendComponent, TitleComponent, TooltipComponent } from "echarts/components";
+import {
+  LegendComponent,
+  TitleComponent,
+  TooltipComponent,
+} from "echarts/components";
 import * as echarts from "echarts/core";
 import { LabelLayout } from "echarts/features";
 import { CanvasRenderer } from "echarts/renderers";
@@ -67,11 +71,7 @@ function EconomyStatus() {
         labelLine: {
           show: true,
         },
-        data: [
-          { value: 100, name: "喝奶茶" },
-          { value: 200, name: "团建" },
-          { value: 600, name: "剩余" },
-        ],
+        data: [{ value: 0, name: "剩余" }],
       },
     ],
   };
