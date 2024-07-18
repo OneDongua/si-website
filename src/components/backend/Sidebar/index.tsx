@@ -34,6 +34,7 @@ export default function Sidebar({ sidebar, setSidebar }) {
         </nav>
         <div
           className={styles.logout}
+          title="退出登录"
           onClick={(e) => {
             removeCookie("email", { path: "/" });
           }}>
