@@ -3,6 +3,8 @@ import CryptoJS from "crypto-js";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 
+import useIsBrowser from "@docusaurus/useIsBrowser";
+
 import styles from "./index.module.css";
 
 async function check(email: string, password: string) {
@@ -39,8 +41,12 @@ export default function Login() {
 
   const [cookies, setCookie] = useCookies();
 
-  const params = new URLSearchParams(window.location.search);
-  const jumpto = params.get("jumpto");
+  const isBrowser = useIsBrowser();
+  let jumpto: string;
+  if (isBrowser) {
+    const params = new URLSearchParams(window.location.search);
+    jumpto = params.get("jumpto");
+  }
 
   const statusTexts = {
     0: "登录",
