@@ -77,6 +77,7 @@ const config: Config = {
           label: "关于",
           position: "right",
         },
+
         {
           href: "https://github.com/OneDongua/si-website",
           className: "header-github-link",
