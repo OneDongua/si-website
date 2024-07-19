@@ -40,7 +40,9 @@ async function getData() {
   return array;
 }
 
-export default function EconomyStatus() {
+export default function EconomyStatus(props: { noColorMode?: boolean }) {
+  const { noColorMode } = props;
+
   echarts.use([
     TooltipComponent,
     LegendComponent,
@@ -148,7 +150,7 @@ export default function EconomyStatus() {
     },
   };
 
-  const { colorMode } = useColorMode();
+  const { colorMode } = noColorMode ? { colorMode: "light" } : useColorMode();
 
   useEffect(() => {
     async function getAndSetData() {
@@ -165,7 +167,7 @@ export default function EconomyStatus() {
     //延迟获取背景色，否则获取到的是上一个颜色
     const timer = setTimeout(() => {
       setBackgroundColor(
-        getComputedStyle(document.getElementById("card"))
+        getComputedStyle(document.getElementById("statusCard"))
           .getPropertyValue("--ifm-card-background-color")
           .trim()
       );
@@ -176,7 +178,7 @@ export default function EconomyStatus() {
   }, [colorMode]);
 
   return (
-    <div className={clsx("card shadow--md", styles.statusCard)} id="card">
+    <div className={clsx("card shadow--md", styles.statusCard)} id="statusCard">
       <ReactEChartsCore
         echarts={echarts}
         option={option}

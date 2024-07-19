@@ -4,17 +4,16 @@
   flex-direction: column;
 }
 
-.navbar {
-  transition: transform var(--ifm-transition-fast) ease;
-}
-
-.content {
-  flex: 1 0 auto;
-  display: flex;
-}
-
 .main {
   display: flex;
+  flex: 1;
   width: 100%;
   min-height: 100%;
+  padding-left: 81px;
+}
+
+@media (max-width: 640px) {
+  .main {
+    padding-left: 0;
+  }
 }

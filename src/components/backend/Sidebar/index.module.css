@@ -2,9 +2,11 @@
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  z-index: var(--ifm-z-index-dropdown);
 }
 
 .sidebar {
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,9 +35,6 @@
 }
 
 @media (max-width: 640px) {
-  .sidebar {
-    position: fixed;
-  }
   .sidebar[data-show="false"] {
     transform: translate3d(-100%, 0, 0);
   }
@@ -87,12 +86,7 @@
   bottom: 0;
   border-radius: 50%;
   cursor: pointer;
-}
-
-@media (max-width: 640px) {
-  .logout {
-    bottom: var(--ifm-navbar-height);
-  }
+  bottom: var(--ifm-navbar-height);
 }
 
 .logout:hover {

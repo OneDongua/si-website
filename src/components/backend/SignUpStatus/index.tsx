@@ -4,13 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "./index.module.css";
 
 async function getData() {
-  let mData = {}; /* && {
-    "1720944555451": {
-      name: "李华",
-      classes: "高一（1）班",
-      email: "123456789@qq.com",
-    },
-  }; // 测试数据，记得注释！ */
+  let mData = {};
   await fetch("/api/SignUpHandler?timestamp=" + Date.now().toString(), {
     method: "GET",
     headers: {

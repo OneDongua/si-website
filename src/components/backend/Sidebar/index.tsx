@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 
 import { useHistory } from "@docusaurus/router";
