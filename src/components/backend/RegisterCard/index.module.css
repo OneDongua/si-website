@@ -1,18 +1,28 @@
 .card {
-  margin: 10% auto;
+  margin: auto;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   width: 28%;
   min-width: 360px;
+  min-height: 432px;
 }
 
 .title {
-  align-self: center;
-  font-size: 2rem;
-  line-height: 2;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   font-weight: 700;
+}
+
+.title__main {
+  font-size: 2rem;
+}
+
+.title__sub {
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .composedInput {

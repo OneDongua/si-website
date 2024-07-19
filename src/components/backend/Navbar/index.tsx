@@ -1,10 +1,15 @@
 import clsx from "clsx";
 import { useCookies } from "react-cookie";
 
+import { useHistory } from "@docusaurus/router";
+
 import styles from "./index.module.css";
 
 export default function Navbar({ sidebar, setSidebar }) {
   const [cookies, setCookie, removeCookie] = useCookies();
+
+  const history = useHistory();
+
   return (
     <nav
       aria-label="主导航"
@@ -17,12 +22,19 @@ export default function Navbar({ sidebar, setSidebar }) {
             onClick={(e) => {
               setSidebar(!sidebar);
             }}>
-            <svg height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368">
-              <path d="M0 0h24v24H0V0z" fill="none" />
-              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+            <svg
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#5f6368">
+              <path d="M160-240q-17 0-28.5-11.5T120-280q0-17 11.5-28.5T160-320h640q17 0 28.5 11.5T840-280q0 17-11.5 28.5T800-240H160Zm0-200q-17 0-28.5-11.5T120-480q0-17 11.5-28.5T160-520h640q17 0 28.5 11.5T840-480q0 17-11.5 28.5T800-440H160Zm0-200q-17 0-28.5-11.5T120-680q0-17 11.5-28.5T160-720h640q17 0 28.5 11.5T840-680q0 17-11.5 28.5T800-640H160Z" />
             </svg>
           </div>
-          <a className={styles.navbar__brand} href="/backend">
+          <a
+            className={styles.navbar__brand}
+            onClick={(e) => {
+              history.push("/backend");
+            }}>
             <div className={styles.navbar__logo}>
               <img src="/img/logo.png" alt="Logo" />
             </div>
@@ -34,10 +46,18 @@ export default function Navbar({ sidebar, setSidebar }) {
         <div
           className={clsx(styles.navbar__items, styles.navbar__items__right)}>
           <div className={styles.navbar__item}>{cookies.email}</div>
-          <a className={clsx(styles.navbar__home)} title="返回主页" href="/">
-            <svg height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368">
-              <path d="M0 0h24v24H0V0z" fill="none" />
-              <path d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z" />
+          <a
+            className={clsx(styles.navbar__home)}
+            title="返回主页"
+            onClick={(e) => {
+              history.push("/");
+            }}>
+            <svg
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#5f6368">
+              <path d="M240-200h120v-200q0-17 11.5-28.5T400-440h160q17 0 28.5 11.5T600-400v200h120v-360L480-740 240-560v360Zm-80 0v-360q0-19 8.5-36t23.5-28l240-180q21-16 48-16t48 16l240 180q15 11 23.5 28t8.5 36v360q0 33-23.5 56.5T720-120H560q-17 0-28.5-11.5T520-160v-200h-80v200q0 17-11.5 28.5T400-120H240q-33 0-56.5-23.5T160-200Zm320-270Z" />
             </svg>
           </a>
         </div>
