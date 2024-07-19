@@ -11,10 +11,10 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       return new Response("Error: no request body.", { status: 400 });
     }
 
-    if (body.code === (await context.env.CODE.get(0)))
-      return new Response("Error: wrong code.", { status: 400 });
+    if (body.code !== (await context.env.CODE.get(0)))
+      return new Response("Error: wrong code.");
 
-    await context.env.USERS.put(body.email, JSON.stringify(body.password));
+    await context.env.USERS.put(body.email, body.password);
     return new Response("Success");
   }
   return new Response("Error: unknown error", { status: 400 });

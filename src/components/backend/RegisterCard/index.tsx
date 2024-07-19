@@ -88,7 +88,7 @@ export default function Login() {
         <label htmlFor="code">注册码:</label>
         <input
           className={styles.input}
-          type="password"
+          type="text"
           id="code"
           onChange={(e) => {
             setCode(e.target.value);
