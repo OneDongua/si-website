@@ -34,13 +34,12 @@ async function getData() {
 }
 export default function SignUpStatus() {
   const [data, setData] = useState(null);
-  useEffect(() => {
-    const timeout = setTimeout(async () => {
-      const mData = await getData();
-      setData(mData);
-    }, 200);
 
-    return () => clearTimeout(timeout);
+  useEffect(() => {
+    async function getAndSetData() {
+      setData(await getData());
+    }
+    getAndSetData();
   }, []);
 
   return (
