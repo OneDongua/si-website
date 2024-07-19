@@ -15,7 +15,32 @@ import { useColorMode } from "@docusaurus/theme-common";
 
 import styles from "./index.module.css";
 
-function EconomyStatus() {
+async function getData() {
+  let array: Array<any>;
+  await fetch("/api/DataHandler", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ get: "economy" }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Network response was not ok");
+      }
+    })
+    .then((data) => {
+      array = data.economy;
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
+  return array;
+}
+
+export default function EconomyStatus() {
   echarts.use([
     TooltipComponent,
     LegendComponent,
@@ -24,6 +49,9 @@ function EconomyStatus() {
     LabelLayout,
     TitleComponent,
   ]);
+
+  const [data, setData] = useState([]);
+
   const option = {
     title: {
       text: "经费",
@@ -72,7 +100,7 @@ function EconomyStatus() {
         labelLine: {
           show: true,
         },
-        data: [{ value: 0, name: "剩余" }],
+        data: data,
       },
     ],
   };
@@ -123,6 +151,17 @@ function EconomyStatus() {
   const { colorMode } = useColorMode();
 
   useEffect(() => {
+    async function getAndSetData() {
+      try {
+        setData(await getData());
+        return;
+      } catch (error) {
+        console.log(error);
+      }
+      setData([]);
+    }
+    getAndSetData();
+
     //延迟获取背景色，否则获取到的是上一个颜色
     const timer = setTimeout(() => {
       setBackgroundColor(
@@ -141,11 +180,8 @@ function EconomyStatus() {
       <ReactEChartsCore
         echarts={echarts}
         option={option}
-        lazyUpdate={true}
         theme={colorMode === "light" ? lightTheme : darkTheme}
       />
     </div>
   );
 }
-
-export default EconomyStatus;

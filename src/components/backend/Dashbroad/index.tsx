@@ -17,8 +17,7 @@ async function test() {
       }
     })
     .then((data) => {
-      console.log("test1: ", data);
-      console.log("test2: ", JSON.stringify(data));
+      console.log(data);
     })
     .catch((error) => {
       throw new Error(error);
