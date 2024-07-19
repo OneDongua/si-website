@@ -45,7 +45,7 @@ export default function Login() {
   const statusTexts = {
     0: "注册",
     1: "注册中…",
-    2: "注册成功",
+    2: "注册成功，正在跳转登录",
   };
 
   const history = useHistory();
@@ -110,6 +110,10 @@ export default function Login() {
           try {
             if (await checkAndRegister(email, password, code)) {
               setStatus(2);
+              const timer = setTimeout(() => {
+                history.push("/backend/login");
+              }, 1000);
+              return () => clearTimeout(timer);
             }
           } catch (error) {
             alert(error);
