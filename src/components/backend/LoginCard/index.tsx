@@ -3,8 +3,7 @@ import CryptoJS from "crypto-js";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 
-import { useHistory } from "@docusaurus/router";
-import useIsBrowser from "@docusaurus/useIsBrowser";
+import { useHistory, useLocation } from "@docusaurus/router";
 
 import styles from "./index.module.css";
 
@@ -42,12 +41,7 @@ export default function Login() {
 
   const [cookies, setCookie] = useCookies();
 
-  const isBrowser = useIsBrowser();
-  let jumpto: string;
-  if (isBrowser) {
-    const params = new URLSearchParams(window.location.search);
-    jumpto = params.get("jumpto");
-  }
+  let jumpto = new URLSearchParams(useLocation().search).get("jumpto");
 
   const history = useHistory();
 
@@ -106,17 +100,13 @@ export default function Login() {
             if (email == "IAmAdminForSURE") {
               setCookie("email", "admin", { path: "/" });
               setStatus(2);
-              history.push("/backend");
+              history.push(jumpto ? jumpto : "/backend");
               return;
             }
             if (await check(email, password)) {
               setCookie("email", email, { path: "/" });
               setStatus(2);
-              if (jumpto) {
-                window.location.href = jumpto;
-              } else {
-                history.push("/backend");
-              }
+              history.push(jumpto ? jumpto : "/backend");
             } else {
               alert("账号或密码错误");
             }

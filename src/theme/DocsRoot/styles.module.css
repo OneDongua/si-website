@@ -2,3 +2,8 @@
   margin: auto 10%;
   font-weight: bold;
 }
+
+.a {
+  text-decoration-line: underline !important;
+  cursor: pointer;
+}

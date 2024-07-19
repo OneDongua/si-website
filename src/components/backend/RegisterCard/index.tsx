@@ -7,13 +7,14 @@ import { useHistory } from "@docusaurus/router";
 import styles from "./index.module.css";
 
 async function checkAndRegister(email: string, password: string, code: string) {
-  const rightCode = CryptoJS.MD5(email + email).toString();
-  if (code !== rightCode) throw new Error("注册码无效");
-
   const encryptedPassword = CryptoJS.MD5(password + ":" + email).toString();
   await fetch("/api/RegisterHandler", {
     method: "POST",
-    body: JSON.stringify({ email: encryptedPassword }),
+    body: JSON.stringify({
+      email: email,
+      password: encryptedPassword,
+      code: code,
+    }),
   })
     .then((response) => {
       if (response.ok) {
@@ -22,11 +23,18 @@ async function checkAndRegister(email: string, password: string, code: string) {
         throw new Error("Network response was not ok");
       }
     })
+    .then((data) => {
+      if (data === "Success") {
+        return true;
+      } else {
+        throw new Error(data);
+      }
+    })
     .catch((error) => {
       throw new Error(error);
     });
 
-  return true;
+  return false;
 }
 export default function Login() {
   const [status, setStatus] = useState(0);

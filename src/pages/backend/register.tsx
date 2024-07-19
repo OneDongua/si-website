@@ -18,5 +18,5 @@ export default function Login() {
     }
   }, []);
 
-  return <Layout>{[<RegisterCard />]}</Layout>;
+  return <Layout>{[<RegisterCard key={0} />]}</Layout>;
 }

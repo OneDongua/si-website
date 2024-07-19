@@ -1,11 +1,12 @@
 .card {
-  margin: 10% auto;
+  margin: auto;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   width: 28%;
   min-width: 360px;
+  min-height: 360px;
 }
 
 .title {

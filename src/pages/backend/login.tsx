@@ -18,5 +18,5 @@ export default function Login() {
     }
   }, []);
 
-  return <Layout>{[<LoginCard />]}</Layout>;
+  return <Layout>{[<LoginCard key={0} />]}</Layout>;
 }

@@ -22,7 +22,7 @@ function Backend() {
 
   return (
     <Layout showIfLogon={true}>
-      {[<Dashbroad />, <RegisterCodeGenerator />]}
+      {[<Dashbroad key={0} />, <RegisterCodeGenerator key={1} />]}
     </Layout>
   );
 }
