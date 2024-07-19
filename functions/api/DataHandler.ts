@@ -15,9 +15,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     if (body.get) {
       const what = body.get;
       if (what === "economy") {
-        return new Response(
-          JSON.stringify({ economy: await context.env.DATA.get("__economy") })
-        );
+        return new Response(await context.env.DATA.get("__economy"));
       }
       if (what === "user") {
         return new Response(await context.env.DATA.get(body.email));
