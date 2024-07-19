@@ -24,9 +24,7 @@ async function checkAndRegister(email: string, password: string, code: string) {
       }
     })
     .then((data) => {
-      if (data === "Success") {
-        return true;
-      } else {
+      if (data !== "Success") {
         throw new Error(data);
       }
     })
@@ -34,7 +32,7 @@ async function checkAndRegister(email: string, password: string, code: string) {
       throw new Error(error);
     });
 
-  return false;
+  return true;
 }
 export default function Login() {
   const [status, setStatus] = useState(0);
