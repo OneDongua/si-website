@@ -6,7 +6,7 @@ import Layout from "@site/src/components/backend/Layout";
 
 import Dashbroad from "../../components/backend/Dashbroad";
 
-function Backend() {
+export default function Backend() {
   const [cookie] = useCookies();
   const isLogon = cookie.email;
 
@@ -20,5 +20,3 @@ function Backend() {
 
   return <Layout showIfLogon={true}>{[<Dashbroad key={0} />]}</Layout>;
 }
-
-export default Backend;
