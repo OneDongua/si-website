@@ -1,9 +1,18 @@
 .card {
-  padding: 1rem;
-  overflow-x: auto;
+  max-height: 640px;
 }
 
 .table {
-  margin: 0 auto;
-  //overflow-x: auto;
+  margin: auto;
+}
+
+.table > * {
+  word-break: keep-all;
+}
+
+@media (max-width: 640px) {
+  .table {
+    margin: 0.5rem;
+    font-size: 92%;
+  }
 }

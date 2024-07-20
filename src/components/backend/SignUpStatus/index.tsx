@@ -4,7 +4,38 @@ import { useEffect, useState } from "react";
 import styles from "./index.module.css";
 
 async function getData() {
-  let mData = {};
+  let mData = {
+    1720944555451: {
+      name: "李华",
+      classes: "高一(1)班",
+      email: "1234567890@test.com",
+    },
+    1720944555452: {
+      name: "李华",
+      classes: "高一(1)班",
+      email: "1234567890@test.com",
+    },
+    1720944555453: {
+      name: "李华",
+      classes: "高一(1)班",
+      email: "1234567890@test.com",
+    },
+    1720944555463: {
+      name: "李华",
+      classes: "高一(1)班",
+      email: "1234567890@test.com",
+    },
+    1720944555473: {
+      name: "李华",
+      classes: "高一(1)班",
+      email: "1234567890@test.com",
+    },
+    1720944555483: {
+      name: "李华",
+      classes: "高一(1)班",
+      email: "1234567890@test.com",
+    },
+  };
   await fetch("/api/SignUpHandler?timestamp=" + Date.now().toString(), {
     method: "GET",
     headers: {
