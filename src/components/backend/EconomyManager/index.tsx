@@ -56,6 +56,12 @@ async function uploadData(data: Array<any>) {
 
 export default function EconomyManager() {
   const [data, setData] = useState(null);
+  const [status, setStatus] = useState(0);
+
+  const statusText = {
+    0: "保存并上传",
+    1: "上传中…",
+  };
 
   useEffect(() => {
     async function getAndSetData() {
@@ -71,8 +77,11 @@ export default function EconomyManager() {
         <button
           className={clsx("button button--primary", styles.uploadButton)}
           onClick={async (e) => {
+            setStatus(1);
             await uploadData(data);
-          }}>
+            setStatus(0);
+          }}
+          disabled={status === 1}>
           保存并上传
         </button>
       </div>
