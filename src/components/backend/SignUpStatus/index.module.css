@@ -13,6 +13,7 @@
 
 @media (max-width: 640px) {
   .table {
+    margin: 0;
     font-size: 92%;
   }
 }
