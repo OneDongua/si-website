@@ -3,8 +3,7 @@ import { useCookies } from "react-cookie";
 
 import { useHistory } from "@docusaurus/router";
 import Layout from "@site/src/components/backend/Layout";
-
-import RegisterCard from "../../components/backend/RegisterCard";
+import RegisterCard from "@site/src/components/backend/RegisterCard";
 
 export default function Login() {
   const [cookie] = useCookies();

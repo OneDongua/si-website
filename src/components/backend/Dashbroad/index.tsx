@@ -1,5 +1,6 @@
-import EconomyStatus from "../../EconomyStatus";
-import SignUpStatus from "../SignUpStatus";
+import SignUpStatus from "@site/src/components/backend/SignUpStatus";
+import EconomyStatus from "@site/src/components/EconomyStatus";
+
 import styles from "./index.module.css";
 
 export default function Dashbroad() {

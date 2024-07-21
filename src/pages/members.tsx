@@ -1,7 +1,6 @@
+import MemberProfile from "@site/src/components/MemberProfile";
+import members from "@site/src/data/members.data";
 import Layout from "@theme/Layout";
-
-import MemberProfile from "../components/MemberProfile";
-import members from "../data/members.data";
 
 function MemberList() {
   return (

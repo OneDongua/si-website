@@ -16,7 +16,7 @@ import { useColorMode } from "@docusaurus/theme-common";
 import styles from "./index.module.css";
 
 async function getData() {
-  let array: Array<any>;
+  let array = [];
   await fetch("/api/DataHandler", {
     method: "POST",
     headers: {
@@ -35,7 +35,7 @@ async function getData() {
       array = data.economy;
     })
     .catch((error) => {
-      throw new Error(error);
+      console.error(error);
     });
   return array;
 }
@@ -154,13 +154,7 @@ export default function EconomyStatus(props: { noColorMode?: boolean }) {
 
   useEffect(() => {
     async function getAndSetData() {
-      try {
-        setData(await getData());
-        return;
-      } catch (error) {
-        console.log(error);
-      }
-      setData([]);
+      setData(await getData());
     }
     getAndSetData();
 
