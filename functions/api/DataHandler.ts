@@ -22,9 +22,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       }
     } else {
       if (body.__economy) {
-        await context.env.DATA.put(
-          context.env.DATA.put("__economy", JSON.stringify(body.__economy))
-        );
+        await context.env.DATA.put("__economy", JSON.stringify(body.__economy));
         return new Response(JSON.stringify({ msg: "Success" }));
       }
     }
