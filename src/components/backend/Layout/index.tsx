@@ -19,24 +19,20 @@ function Layout(props: {
 
   return (
     <div className={styles.background}>
-      <div className={styles.navbar}>
-        <Navbar sidebar={isSidebarShow} setSidebar={setIsSidebarShow} />
-      </div>
+      <Navbar sidebar={isSidebarShow} setSidebar={setIsSidebarShow} />
 
-      <div className={styles.content}>
-        {isLogon && (
-          <Sidebar
-            sidebar={isSidebarShow}
-            setSidebar={setIsSidebarShow}
-            setContentIndex={setContentIndex}
-          />
-        )}
-        <main className={styles.main}>
-          {showIfLogon
-            ? isLogon && childrens[contentIndex]
-            : childrens[contentIndex]}
-        </main>
-      </div>
+      {isLogon && (
+        <Sidebar
+          sidebar={isSidebarShow}
+          setSidebar={setIsSidebarShow}
+          setContentIndex={setContentIndex}
+        />
+      )}
+      <main className={styles.main}>
+        {showIfLogon
+          ? isLogon && childrens[contentIndex]
+          : childrens[contentIndex]}
+      </main>
     </div>
   );
 }

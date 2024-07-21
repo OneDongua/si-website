@@ -15,7 +15,34 @@ import { useColorMode } from "@docusaurus/theme-common";
 
 import styles from "./index.module.css";
 
-function EconomyStatus() {
+async function getData() {
+  let array = [];
+  await fetch("/api/DataHandler", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ get: "economy" }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Network response was not ok");
+      }
+    })
+    .then((data) => {
+      array = data.economy;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  return array;
+}
+
+export default function EconomyStatus(props: { noColorMode?: boolean }) {
+  const { noColorMode } = props;
+
   echarts.use([
     TooltipComponent,
     LegendComponent,
@@ -24,6 +51,9 @@ function EconomyStatus() {
     LabelLayout,
     TitleComponent,
   ]);
+
+  const [data, setData] = useState([]);
+
   const option = {
     title: {
       text: "经费",
@@ -72,7 +102,7 @@ function EconomyStatus() {
         labelLine: {
           show: true,
         },
-        data: [{ value: 0, name: "剩余" }],
+        data: data,
       },
     ],
   };
@@ -120,13 +150,18 @@ function EconomyStatus() {
     },
   };
 
-  const { colorMode } = useColorMode();
+  const { colorMode } = noColorMode ? { colorMode: "light" } : useColorMode();
 
   useEffect(() => {
+    async function getAndSetData() {
+      setData(await getData());
+    }
+    getAndSetData();
+
     //延迟获取背景色，否则获取到的是上一个颜色
     const timer = setTimeout(() => {
       setBackgroundColor(
-        getComputedStyle(document.getElementById("card"))
+        getComputedStyle(document.getElementById("statusCard"))
           .getPropertyValue("--ifm-card-background-color")
           .trim()
       );
@@ -137,15 +172,12 @@ function EconomyStatus() {
   }, [colorMode]);
 
   return (
-    <div className={clsx("card shadow--md", styles.statusCard)} id="card">
+    <div className={clsx("card shadow--md", styles.statusCard)} id="statusCard">
       <ReactEChartsCore
         echarts={echarts}
         option={option}
-        lazyUpdate={true}
         theme={colorMode === "light" ? lightTheme : darkTheme}
       />
     </div>
   );
 }
-
-export default EconomyStatus;

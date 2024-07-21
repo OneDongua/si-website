@@ -25,8 +25,9 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       const keys = list.keys;
       const data = {};
       for (const key of keys) {
-        const value = await context.env.PART_LIST.get(key.name);
-        data[key.name] = JSON.parse(value);
+        data[key.name] = await context.env.PART_LIST.get(key.name, {
+          type: "json",
+        });
       }
       return new Response(JSON.stringify(data));
     }

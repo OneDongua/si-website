@@ -1,4 +1,4 @@
-.column {
+.parent {
   display: flex;
   flex-direction: column;
   width: calc(100% / 4);
@@ -6,14 +6,14 @@
 }
 
 @media (max-width: 1024px) {
-  .column {
+  .parent {
     margin: 0 auto;
     width: calc(100% / 2);
   }
 }
 
 @media (max-width: 640px) {
-  .column {
+  .parent {
     width: 85%;
   }
 }
