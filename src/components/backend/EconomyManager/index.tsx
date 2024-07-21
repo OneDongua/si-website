@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "./index.module.css";
 
 async function getData() {
-  let array: Array<any>;
+  let array = [];
   await fetch("/api/DataHandler", {
     method: "POST",
     headers: {
@@ -113,6 +113,21 @@ export default function EconomyManager() {
                       className={styles.input}
                       value={item.value}
                       type="tel"
+                      onFocus={(e) => {
+                        e.target.select();
+                      }}
+                      onChange={(e) => {
+                        setData(
+                          data.map((i: any) => {
+                            if (i.id === item.id) {
+                              const value = e.target.value;
+                              i.value =
+                                value !== "" ? Number.parseInt(value) : 0;
+                            }
+                            return i;
+                          })
+                        );
+                      }}
                     />
                   </td>
                   <td>

@@ -38,8 +38,8 @@
 .tableHead {
 }
 
-.tableBody {
-  border-top: 1px solid var(--ifm-table-border-color);
+.tableBody > * {
+  border-top: 1px solid var(--ifm-table-border-color) !important;
 }
 
 .tableRow {
