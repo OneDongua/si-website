@@ -11,6 +11,7 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
+  width: 81px;
   border-right: 1px solid var(--ifm-toc-border-color);
   background-color: var(--ifm-navbar-background-color);
   transform: translate3d(0, 0, 0);
@@ -79,14 +80,17 @@
 
 .logout {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  margin: 1rem;
   padding: 0.5rem;
+  margin-bottom: 1rem;
   position: absolute;
-  bottom: 0;
-  border-radius: 50%;
   cursor: pointer;
   bottom: var(--ifm-navbar-height);
+  font-size: 0.75rem;
+  color: var(--ifm-menu-color);
+  border-radius: 0.8rem;
 }
 
 .logout:hover {
