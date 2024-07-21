@@ -82,7 +82,7 @@ export default function EconomyManager() {
             setStatus(0);
           }}
           disabled={status === 1}>
-          保存并上传
+          {statusText[status]}
         </button>
       </div>
       <table className={styles.table}>
