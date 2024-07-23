@@ -64,6 +64,7 @@ const config: Config = {
       },
       items: [
         { to: "sign_up", label: "🔥报名", position: "left" },
+        { to: "qa", label: "Q&A", position: "left" },
         {
           type: "doc",
           docId: "intro",

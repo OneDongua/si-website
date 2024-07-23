@@ -28,7 +28,7 @@ export default function Sidebar(props: {
         role="presentation"
         className={styles.presentation}
         data-show={sidebar}
-        onClick={(e) => {
+        onClick={() => {
           setSidebar(false);
         }}
       />
@@ -38,7 +38,7 @@ export default function Sidebar(props: {
           className={clsx("thin-scrollbar", styles.background)}>
           <div
             className={clsx(styles.item, index === 0 && styles.item__active)}
-            onClick={(e) => {
+            onClick={() => {
               setIndex(0);
             }}>
             <svg height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368">
@@ -49,7 +49,7 @@ export default function Sidebar(props: {
           </div>
           <div
             className={clsx(styles.item, index === 1 && styles.item__active)}
-            onClick={(e) => {
+            onClick={() => {
               setIndex(1);
             }}>
             <svg
@@ -65,7 +65,7 @@ export default function Sidebar(props: {
         <div
           className={styles.logout}
           title="退出登录"
-          onClick={(e) => {
+          onClick={() => {
             removeCookie("email", { path: "/" });
             history.push("/backend/login");
           }}>

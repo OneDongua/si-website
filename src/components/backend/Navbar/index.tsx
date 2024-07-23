@@ -19,7 +19,7 @@ export default function Navbar({ sidebar, setSidebar }) {
           <div
             className={styles.navbar__toggle}
             aria-label="侧边栏"
-            onClick={(e) => {
+            onClick={() => {
               setSidebar(!sidebar);
             }}>
             <svg
@@ -32,7 +32,7 @@ export default function Navbar({ sidebar, setSidebar }) {
           </div>
           <a
             className={styles.navbar__brand}
-            onClick={(e) => {
+            onClick={() => {
               history.push("/backend");
             }}>
             <div className={styles.navbar__logo}>
@@ -49,7 +49,7 @@ export default function Navbar({ sidebar, setSidebar }) {
           <a
             className={clsx(styles.navbar__home)}
             title="返回主页"
-            onClick={(e) => {
+            onClick={() => {
               history.push("/");
             }}>
             <svg

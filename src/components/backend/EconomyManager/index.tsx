@@ -142,7 +142,7 @@ export default function EconomyManager() {
                   <td>
                     <div
                       className={styles.operate}
-                      onClick={(e) => {
+                      onClick={() => {
                         setData(
                           data.filter((i: any) => {
                             return i.id !== item.id;
@@ -159,7 +159,7 @@ export default function EconomyManager() {
       </table>
       <button
         className={styles.addButton}
-        onClick={(e) => {
+        onClick={() => {
           setData(
             data.concat({ id: data.length + 1, name: "新项目", value: 0 })
           );

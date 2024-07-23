@@ -53,7 +53,7 @@ export default function Login() {
       <div className={styles.title}>
         <a
           className={styles.title__sub}
-          onClick={(e) => {
+          onClick={() => {
             history.push("/backend/login");
           }}>
           登录

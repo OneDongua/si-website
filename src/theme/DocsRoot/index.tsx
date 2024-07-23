@@ -21,7 +21,7 @@ function accessDeny() {
       ❌ 您没有权限查看该目录 请
       <a
         className={styles.a}
-        onClick={(e) => {
+        onClick={() => {
           history.push("/backend/login?jumpto=/docs/intro");
         }}>
         登录
