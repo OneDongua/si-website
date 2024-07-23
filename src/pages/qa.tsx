@@ -59,8 +59,8 @@ async function uploadQuestion(data: QAData) {
     });
 }
 
-function Dialog(props: { onClose?: () => void }) {
-  const { onClose } = props;
+function Dialog(props: { onClose?: () => void; onFinish?: () => void }) {
+  const { onClose, onFinish } = props;
 
   const escFunction = useCallback((e: any) => {
     if (e.key === "Escape") {
@@ -109,14 +109,11 @@ function Dialog(props: { onClose?: () => void }) {
                   question: text,
                   answer: "",
                 });
-                onClose();
-                const confirmed = confirm("提交成功");
-                if (confirmed) {
-                  window.location.reload();
-                }
+                onFinish();
               } catch (error) {
                 alert("提交失败");
                 console.error(error);
+                onClose();
               }
               setStatus(0);
             }}
@@ -133,10 +130,11 @@ export default function QA() {
   const [showDialog, setShowDialog] = useState(false);
   const [data, setData] = useState(null as QADatas);
 
+  async function getAndSetData() {
+    setData(await getData());
+  }
+
   useEffect(() => {
-    async function getAndSetData() {
-      setData(await getData());
-    }
     getAndSetData();
   }, []);
 
@@ -162,7 +160,18 @@ export default function QA() {
           }}>
           我要提问
         </div>
-        {showDialog && <Dialog onClose={() => setShowDialog(false)} />}
+        {showDialog && (
+          <Dialog
+            onClose={() => setShowDialog(false)}
+            onFinish={() => {
+              setShowDialog(false);
+              const timer = setTimeout(async () => {
+                await getAndSetData();
+              }, 1000);
+              return () => clearTimeout(timer);
+            }}
+          />
+        )}
       </div>
     </Layout>
   );
