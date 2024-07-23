@@ -110,6 +110,7 @@ export default function QAManager() {
                     <textarea
                       className={styles.textarea}
                       rows={2}
+                      maxLength={512}
                       value={data[key].answer}
                       onChange={(e) => {
                         setData(

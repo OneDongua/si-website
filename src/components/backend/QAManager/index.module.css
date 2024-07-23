@@ -31,10 +31,6 @@
   border-radius: 0.5rem;
 }
 
-.table > * {
-  word-break: keep-all;
-}
-
 .tableHead {
 }
 
