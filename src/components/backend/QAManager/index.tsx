@@ -133,9 +133,7 @@ export default function QAManager() {
                           await deleteQuestion(Number.parseInt(key));
                           setData(
                             Object.fromEntries(
-                              Object.entries(data).filter(
-                                ([key]) => key !== key
-                              )
+                              Object.entries(data).filter(([k]) => k !== key)
                             )
                           );
                         } catch (error) {

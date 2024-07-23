@@ -110,7 +110,10 @@ function Dialog(props: { onClose?: () => void }) {
                   answer: "",
                 });
                 onClose();
-                alert("提交成功");
+                const confirmed = confirm("提交成功");
+                if (confirmed) {
+                  window.location.reload();
+                }
               } catch (error) {
                 alert("提交失败");
                 console.error(error);
