@@ -147,9 +147,11 @@ export default function QA() {
             return (
               <div className={clsx(styles.group, "card shadow--md")}>
                 <div className={styles.question}>问：{data[key].question}</div>
-                <div className={styles.answer}>
-                  {data[key].answer ? "答：" + data[key].answer : "暂无回答"}
-                </div>
+                {data[key].answer ? (
+                  <div className={styles.answer}>答：{data[key].answer}</div>
+                ) : (
+                  <div className={styles.noanswer}>暂无回答</div>
+                )}
               </div>
             );
           })}

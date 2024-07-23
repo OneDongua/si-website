@@ -30,7 +30,12 @@
 
 .answer {
   padding: 1rem;
-  color: green;
+  color: var(--ifm-color-success-dark);
+}
+
+.noanswer {
+  padding: 1rem;
+  color: var(--ifm-color-danger-dark);
 }
 
 .ask {
