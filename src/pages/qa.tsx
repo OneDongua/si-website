@@ -165,10 +165,7 @@ export default function QA() {
             onClose={() => setShowDialog(false)}
             onFinish={() => {
               setShowDialog(false);
-              const timer = setTimeout(async () => {
-                await getAndSetData();
-              }, 1000);
-              return () => clearTimeout(timer);
+              alert("提交成功，请手动刷新，可能存在延迟");
             }}
           />
         )}
