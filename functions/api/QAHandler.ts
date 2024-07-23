@@ -10,11 +10,15 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       return new Response("Error: no request body.", { status: 400 });
     }
 
-    await context.env.QA.put(
-      body.timestamp.toString(),
-      JSON.stringify(body.data)
-    );
-    return new Response("Success");
+    if (body.timestamp) {
+      await context.env.QA.put(body.timestamp, JSON.stringify(body.data));
+      return new Response("Success");
+    } else if (body.delete) {
+      await context.env.QA.delete(body.delete);
+      return new Response("Success");
+    }
+
+    return new Response("Error: unknown error", { status: 400 });
   } else if (context.request.method === "GET") {
     const url = new URL(context.request.url);
     const params = url.searchParams;

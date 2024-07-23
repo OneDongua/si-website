@@ -61,8 +61,8 @@
 }
 
 .dialogNegative {
-  border-color: var(--ifm-color-danger);
-  background-color: var(--ifm-color-danger);
+  border-color: var(--ifm-color-danger-dark);
+  background-color: var(--ifm-color-danger-dark);
 }
 
 .dialogPositive {

@@ -88,7 +88,7 @@ export default function QAManager() {
   return (
     <div className={styles.container}>
       <div className={styles.titleBar}>
-        <div className={styles.title}>经费管理</div>
+        <div className={styles.title}>Q&A管理</div>
       </div>
       <table className={styles.table}>
         <thead className={styles.tableHead}>
@@ -114,11 +114,11 @@ export default function QAManager() {
                       onChange={(e) => {
                         setData(
                           Object.fromEntries(
-                            Object.entries(data).map(([key, value]) => {
-                              if (key === key) {
-                                value.answer = e.target.value;
+                            Object.entries(data).map(([k, v]) => {
+                              if (k === key) {
+                                v.answer = e.target.value;
                               }
-                              return [key, value];
+                              return [k, v];
                             })
                           )
                         );
@@ -150,6 +150,7 @@ export default function QAManager() {
                       onClick={async () => {
                         try {
                           await uploadQuestion(Number.parseInt(key), data[key]);
+                          alert("上传成功");
                         } catch (error) {
                           alert("上传失败");
                           console.error(error);
