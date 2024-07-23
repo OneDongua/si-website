@@ -92,6 +92,7 @@ function Dialog(props: { onClose?: () => void; onFinish?: () => void }) {
           className={styles.dialogInput}
           value={text}
           type="text"
+          maxLength={128}
           onChange={(e) => setText(e.target.value)}
         />
         <div className={styles.dialogButtons}>
