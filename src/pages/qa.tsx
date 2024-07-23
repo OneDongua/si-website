@@ -138,7 +138,7 @@ export default function QA() {
   }, []);
 
   return (
-    <Layout title="报名">
+    <Layout title="Q&A">
       <div className={styles.background}>
         <div className={styles.title}>Q&A</div>
         {data &&

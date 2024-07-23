@@ -35,13 +35,13 @@ async function getData() {
   return mData;
 }
 
-async function uploadQuestion(data: QAData) {
+async function uploadQuestion(timestamp: number, data: QAData) {
   await fetch("/api/QAHandler", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ timestamp: Date.now(), data: data }),
+    body: JSON.stringify({ timestamp: timestamp, data: data }),
   })
     .then((response) => {
       if (response.ok) {
@@ -149,7 +149,7 @@ export default function QAManager() {
                       className={styles.operate}
                       onClick={async () => {
                         try {
-                          await uploadQuestion(data[key]);
+                          await uploadQuestion(Number.parseInt(key), data[key]);
                         } catch (error) {
                           alert("上传失败");
                           console.error(error);
