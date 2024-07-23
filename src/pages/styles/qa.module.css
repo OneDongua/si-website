@@ -35,7 +35,7 @@
 
 .noanswer {
   padding: 1rem;
-  color: var(--ifm-color-danger-dark);
+  color: var(--ifm-color-warning-dark);
 }
 
 .ask {
