@@ -5,6 +5,7 @@ import { useHistory } from "@docusaurus/router";
 import Dashbroad from "@site/src/components/backend/Dashbroad";
 import EconomyManager from "@site/src/components/backend/EconomyManager";
 import Layout from "@site/src/components/backend/Layout";
+import QAManager from "@site/src/components/backend/QAManager";
 
 export default function Backend() {
   const [cookie] = useCookies();
@@ -22,6 +23,7 @@ export default function Backend() {
     <Layout showIfLogon={true}>
       <Dashbroad key={0} />
       <EconomyManager key={1} />
+      <QAManager key={2} />
     </Layout>
   );
 }

@@ -55,10 +55,8 @@ async function uploadQuestion(data: QAData) {
       }
     })
     .catch((error) => {
-      alert("提交失败");
-      console.error(error);
+      throw new Error(error);
     });
-  return true;
 }
 
 function Dialog(props: { onClose?: () => void }) {
@@ -106,9 +104,18 @@ function Dialog(props: { onClose?: () => void }) {
             className={clsx(styles.dialogPositive, "button button--primary")}
             onClick={async () => {
               setStatus(1);
-              await uploadQuestion({ question: text, answer: "" });
-              onClose();
-              alert("提交成功");
+              try {
+                await uploadQuestion({
+                  question: text,
+                  answer: "",
+                });
+                onClose();
+                alert("提交成功");
+              } catch (error) {
+                alert("提交失败");
+                console.error(error);
+              }
+              setStatus(0);
             }}
             disabled={status === 1 || text.length === 0}>
             {statusText[status]}
