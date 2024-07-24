@@ -31,6 +31,7 @@
 .answer {
   padding: 1rem;
   color: var(--ifm-color-success-dark);
+  white-space: pre-line;
 }
 
 .noanswer {
