@@ -50,9 +50,19 @@
 }
 
 .background {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
   //scrollbar-gutter: stable;
   overflow-x: hidden;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .item {
@@ -62,7 +72,7 @@
   cursor: pointer;
   font-size: 1rem;
   padding: 0.5rem 1rem 0.5rem 1rem;
-  margin: 0.5rem 0;
+  //margin: 0.5rem 0;
   border-radius: 0.8rem;
   color: var(--ifm-menu-color);
 }
@@ -84,10 +94,8 @@
   align-items: center;
   justify-content: center;
   padding: 0.5rem;
-  margin-bottom: 0.5rem;
-  position: absolute;
+  margin-bottom: var(--ifm-navbar-height);
   cursor: pointer;
-  bottom: var(--ifm-navbar-height);
   font-size: 0.75rem;
   color: var(--ifm-menu-color);
   border-radius: 0.8rem;
