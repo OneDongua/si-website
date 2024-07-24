@@ -12,7 +12,7 @@ interface QADatas {
 }
 
 async function getData() {
-  let mData: QADatas = { 1721737752679: { question: "123", answer: "456" } };
+  let mData: QADatas;
   await fetch("/api/QAHandler?timestamp=" + Date.now().toString(), {
     method: "GET",
     headers: {
