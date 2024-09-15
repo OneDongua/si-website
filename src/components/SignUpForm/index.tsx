@@ -97,35 +97,6 @@ export default function Form(props: { masterSwitch?: boolean }) {
             .catch((error) => {
               console.error(error);
             });
-
-          const url = `https://dav.jianguoyun.com/dav/si-signup/${
-            Date.now().toString
-          }.json`;
-
-          fetch(url, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "text/plain",
-              Authorization:
-                "Basic c2F4eHgxMjNAMTI2LmNvbTphNnFqbnB3dzNmdXJmbTR6", // 个人密钥
-            },
-            body: JSON.stringify(data),
-          })
-            .then((response) => {
-              if (response.ok) {
-                setStatus(2);
-                return response.text();
-              } else {
-                setStatus(3);
-                throw new Error("Network response was not ok");
-              }
-            })
-            .then((data) => {
-              console.log("Success:", data);
-            })
-            .catch((error) => {
-              console.error(error);
-            });
         }}>
         {statusTexts[status]}
       </button>
