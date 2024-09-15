@@ -32,7 +32,7 @@ export default function Home() {
     <Layout title={"主页"} description="惠州一中智能信息社">
       <HomepageHeader />
       <main>
-        <div className={styles.broad}>
+        <div className={styles.board}>
           <EconomyStatus />
         </div>
       </main>

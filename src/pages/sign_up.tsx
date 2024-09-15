@@ -4,7 +4,7 @@ import SignUpForm from "../components/SignUpForm";
 import styles from "./styles/sign_up.module.css";
 
 export default function Signup() {
-  const masterSwitch = false; // 总开关，true为开启，false为关闭
+  const masterSwitch = true; // 总开关，true为开启，false为关闭
 
   return (
     <Layout title="报名">
