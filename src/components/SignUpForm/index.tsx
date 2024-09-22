@@ -3,8 +3,11 @@ import { useState } from "react";
 
 import styles from "./index.module.css";
 
-export default function Form(props: { masterSwitch?: boolean }) {
-  const { masterSwitch } = props;
+export default function Form(props: {
+  masterSwitch?: boolean;
+  autoClear?: boolean;
+}) {
+  const { masterSwitch, autoClear } = props;
 
   const [name, setName] = useState("");
   const [classes, setClasses] = useState("");
@@ -29,6 +32,7 @@ export default function Form(props: { masterSwitch?: boolean }) {
           id="name"
           placeholder="李华"
           disabled={!masterSwitch}
+          value={name}
           onChange={(e) => {
             setName(e.target.value);
           }}
@@ -42,6 +46,7 @@ export default function Form(props: { masterSwitch?: boolean }) {
           id="classes"
           placeholder="高一(1)班"
           disabled={!masterSwitch}
+          value={classes}
           onChange={(e) => {
             setClasses(e.target.value);
           }}
@@ -55,6 +60,7 @@ export default function Form(props: { masterSwitch?: boolean }) {
           id="email"
           placeholder="1234567890@qq.com"
           disabled={!masterSwitch}
+          value={email}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -89,12 +95,14 @@ export default function Form(props: { masterSwitch?: boolean }) {
             .then((response) => {
               if (response.ok) {
                 setStatus(2);
-                setTimeout(() => {
-                  setStatus(0);
-                  setName("");
-                  setClasses("高一()班");
-                  setEmail("");
-                }, 2000);
+                if (autoClear) {
+                  setTimeout(() => {
+                    setStatus(0);
+                    setName("");
+                    setClasses("高一()班");
+                    setEmail("");
+                  }, 2000);
+                }
                 return response.text();
               } else {
                 setStatus(3);

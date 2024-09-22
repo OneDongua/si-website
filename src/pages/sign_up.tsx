@@ -12,7 +12,7 @@ export default function Signup() {
         {!masterSwitch && (
           <b className="alert alert--danger shadow--md">❌ 暂未开放报名</b>
         )}
-        <SignUpForm masterSwitch={masterSwitch} />
+        <SignUpForm masterSwitch={masterSwitch} autoClear={true} />
       </div>
     </Layout>
   );
