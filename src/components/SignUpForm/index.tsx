@@ -78,6 +78,7 @@ export default function Form(props: { masterSwitch?: boolean }) {
             classes: classes,
             email: email,
           };
+          console.log(data);
           fetch("/api/SignUpHandler", {
             method: "POST",
             headers: {
@@ -88,6 +89,12 @@ export default function Form(props: { masterSwitch?: boolean }) {
             .then((response) => {
               if (response.ok) {
                 setStatus(2);
+                setTimeout(() => {
+                  setStatus(0);
+                  setName("");
+                  setClasses("高一()班");
+                  setEmail("");
+                }, 2000);
                 return response.text();
               } else {
                 setStatus(3);
