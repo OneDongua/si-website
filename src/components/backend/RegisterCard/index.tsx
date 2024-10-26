@@ -69,6 +69,11 @@ export default function Login() {
           onChange={(e) => {
             setEmail(e.target.value);
           }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              document.getElementById("password")?.focus();
+            }
+          }}
         />
       </div>
       <div className={styles.composedInput}>
@@ -80,6 +85,11 @@ export default function Login() {
           onChange={(e) => {
             setPassword(e.target.value);
           }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              document.getElementById("code")?.focus();
+            }
+          }}
         />
       </div>
       <div className={styles.composedInput}>
@@ -90,6 +100,12 @@ export default function Login() {
           id="code"
           onChange={(e) => {
             setCode(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              (e.target as HTMLInputElement)?.blur();
+              document.getElementById("submit")?.click();
+            }
           }}
         />
       </div>

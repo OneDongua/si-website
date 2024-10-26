@@ -36,6 +36,11 @@ export default function Form(props: {
           onChange={(e) => {
             setName(e.target.value);
           }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              document.getElementById("classes")?.focus();
+            }
+          }}
         />
       </div>
       <div className={styles.composedInput}>
@@ -50,6 +55,11 @@ export default function Form(props: {
           onChange={(e) => {
             setClasses(e.target.value);
           }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              document.getElementById("email")?.focus();
+            }
+          }}
         />
       </div>
       <div className={styles.composedInput}>
@@ -63,6 +73,12 @@ export default function Form(props: {
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              (e.target as HTMLInputElement)?.blur();
+              document.getElementById("submit")?.click();
+            }
           }}
         />
       </div>

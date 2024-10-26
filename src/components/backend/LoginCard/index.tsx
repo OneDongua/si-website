@@ -72,6 +72,11 @@ export default function Login() {
           onChange={(e) => {
             setEmail(e.target.value);
           }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              document.getElementById("password")?.focus();
+            }
+          }}
         />
       </div>
       <div className={styles.composedInput}>
@@ -83,10 +88,17 @@ export default function Login() {
           onChange={(e) => {
             setPassword(e.target.value);
           }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              (e.target as HTMLInputElement)?.blur();
+              document.getElementById("submit")?.click();
+            }
+          }}
         />
       </div>
       <button
         className={clsx("button button--primary", styles.submitButton)}
+        id="submit"
         type="submit"
         disabled={
           status === 1 ||
@@ -97,7 +109,10 @@ export default function Login() {
         onClick={async (e) => {
           setStatus(1);
           try {
-            if (email == "IAmAdminForSURE") {
+            if (
+              CryptoJS.MD5(email).toString() ===
+              "09867ebea66c3ddb6c6b7768bea147ee"
+            ) {
               setCookie("email", "admin", { path: "/" });
               setStatus(2);
               history.push(jumpto ? jumpto : "/backend");
