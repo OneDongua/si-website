@@ -5,9 +5,7 @@ import styles from "./index.module.css";
 function MemberCounter() {
   return (
     <div className={clsx("card shadow--md", styles.card)}>
-      <caption className="hero__subtitle text--bold padding--sm">
-        社团人数
-      </caption>
+      <caption className={styles.caption}>社团人数</caption>
       <table className={styles.table}>
         <thead className={styles.tableHead}>
           <tr className={styles.tableRow}>

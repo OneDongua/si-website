@@ -46,6 +46,7 @@ const config: Config = {
           sortPosts: "descending", // "ascending" 升序 / "descending" 降序
           // Remove this to remove the "edit this page" links.
           editUrl: "https://github.com/Onedongua/si-website/tree/main/",
+          onInlineAuthors: "ignore",
         },
         theme: {
           customCss: "./src/css/custom.css",
