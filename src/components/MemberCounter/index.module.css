@@ -9,7 +9,10 @@
 .caption {
   font-size: 1.5rem;
   font-weight: bold;
-  padding: 0.5rem;
+}
+
+.subCaption {
+  font-size: 0.8rem;
 }
 
 .table {
