@@ -24,9 +24,18 @@
 }
 
 .board {
+  height: 420px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  gap: 2rem;
+}
+
+@media (max-width: 640px) {
+  .board {
+    height: auto;
+    flex-direction: column;
+  }
 }

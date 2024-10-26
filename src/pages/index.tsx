@@ -6,6 +6,7 @@ import EconomyStatus from "@site/src/components/EconomyStatus";
 import Heading from "@theme/Heading";
 import Layout from "@theme/Layout";
 
+import MemberCounter from "../components/MemberCounter";
 import styles from "./styles/index.module.css";
 
 function HomepageHeader() {
@@ -34,6 +35,7 @@ export default function Home() {
       <main>
         <div className={styles.board}>
           <EconomyStatus />
+          <MemberCounter />
         </div>
       </main>
     </Layout>

@@ -46,6 +46,7 @@ const config: Config = {
           sortPosts: "descending", // "ascending" 升序 / "descending" 降序
           // Remove this to remove the "edit this page" links.
           editUrl: "https://github.com/Onedongua/si-website/tree/main/",
+          onInlineAuthors: "ignore",
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -78,7 +79,6 @@ const config: Config = {
           label: "关于",
           position: "right",
         },
-
         {
           href: "https://github.com/OneDongua/si-website",
           className: "header-github-link",
@@ -95,6 +95,23 @@ const config: Config = {
             {
               label: "后台入口",
               to: "backend",
+            },
+            {
+              label: "邮箱",
+              href: "https://mail.si-hzyz.top",
+            },
+          ],
+        },
+        {
+          title: "惠州一中",
+          items: [
+            {
+              label: "官网",
+              href: "http://www.hzyz.net",
+            },
+            {
+              label: "YOJ",
+              href: "http://oj.hzyz.net",
             },
           ],
         },
