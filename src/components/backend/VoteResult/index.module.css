@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 1rem 12rem;
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    margin: 1rem 1.5rem;
+  }
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.desc {
+  white-space: pre-line;
+}
+
+.loading {
+  align-self: center;
+  padding: 1rem;
+}
+
+.item {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border: 1px solid var(--ifm-color-success-dark);
+  border-radius: 0.5rem;
+  color: var(--ifm-color-success-dark);
+}
