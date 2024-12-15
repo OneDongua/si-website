@@ -36,7 +36,7 @@ async function getData() {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error("Network response was not ok");
+        console.error("Network response was not ok");
       }
     })
     .then((data: VoteDatas) => {
@@ -50,32 +50,43 @@ async function getData() {
     });
   return mData;
 }
-
-async function uploadVote(data: VoteResult) {
-  await fetch("/api/VoteHandler", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.text();
-      } else {
-        throw new Error("Network response was not ok");
-      }
-    })
-    .catch((error) => {
-      throw new Error(error);
-    });
-}
 export default function Vote() {
   const [datas, setDatas] = useState(null as VoteDatas);
-  const [result, setResult] = useState({});
+  const [result, setResult] = useState({} as VoteResult);
+  const [status, setStatus] = useState(0);
+
+  const statusTexts = {
+    0: "提交",
+    1: "提交中…",
+    2: "提交成功",
+    3: "重试",
+  };
   async function getAndSetData() {
     const data = await getData();
     setDatas(data);
+  }
+
+  async function uploadVote() {
+    setStatus(1);
+    await fetch("/api/VoteHandler", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(result),
+    })
+      .then((response) => {
+        if (response.ok) {
+          setStatus(2);
+          return response.text();
+        } else {
+          setStatus(3);
+          console.error("Network response was not ok");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   useEffect(() => {
@@ -92,18 +103,23 @@ export default function Vote() {
                 <div className={styles.title}>{datas[id].title}</div>
                 <div className={styles.desc}>{datas[id].desc}</div>
                 {Object.keys(datas[id].items).map((index) => {
+                  const indexs: number[] = result[id] || [];
+                  const isSelected = indexs.includes(parseInt(index));
                   return (
                     <div
-                      className={styles.item}
+                      className={clsx(
+                        styles.item,
+                        isSelected ? styles.selected : null
+                      )}
                       onClick={() => {
                         const max = parseInt(datas[id].max);
                         const res = { ...result }; //使用展开运算符创建 result 的副本
-                        const indexs: number[] = res[id] || [];
-                        if (indexs.length >= max) {
-                          indexs.shift();
+                        const mIndexs: number[] = res[id] || [];
+                        if (mIndexs.length >= max) {
+                          mIndexs.shift();
                         }
-                        indexs.push(parseInt(index));
-                        res[id] = indexs;
+                        mIndexs.push(parseInt(index));
+                        res[id] = mIndexs;
                         setResult(res);
                         console.log(res);
                       }}
@@ -118,13 +134,14 @@ export default function Vote() {
         ) : (
           <div className={styles.loading}>加载中…</div>
         )}
-        <div
-          className={clsx(styles.ask, "button button--primary")}
+        <button
+          className={clsx(styles.submit, "button button--primary")}
           onClick={() => {
-            uploadVote(result);
-          }}>
-          提交
-        </div>
+            uploadVote();
+          }}
+          disabled={status === 1 || status === 2}>
+          {statusTexts[status]}
+        </button>
       </div>
     </Layout>
   );

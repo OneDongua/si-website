@@ -22,13 +22,20 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       if (!type) return new Response("Error: unknown type", { status: 400 });
       if (type === "calc") {
         const list = await context.env.VOTE.list();
-        const keys = list.keys;
+        const keys: { name: string }[] = list.keys;
         const data = {};
         for (const key of keys) {
-          //if ((key as string).split("+")[0])
-          data[key.name] = await context.env.VOTE.get(key.name, {
-            type: "json",
-          });
+          if (/^\d+\+\d+$/.test(key.name)) {
+            const id = key.name.split("+")[0];
+            const items: number[] = await context.env.VOTE.get(key.name, {
+              type: "json",
+            });
+            for (const item of items) {
+              if (!data[id]) data[id] = {};
+              if (!data[id][item]) data[id][item] = 0;
+              data[id][item] += 1;
+            }
+          }
         }
         return new Response(JSON.stringify(data));
       } else if (type === "get") {
