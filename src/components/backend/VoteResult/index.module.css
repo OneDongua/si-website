@@ -1,9 +1,15 @@
 .container {
   display: flex;
+  align-items: center;
   width: 100%;
   flex-direction: column;
-  padding: 1rem 12rem;
+  margin: 1rem;
   gap: 1.5rem;
+}
+
+.container > * {
+  width: 100%;
+  max-width: 600px;
 }
 
 @media (max-width: 1024px) {
@@ -33,9 +39,16 @@
 }
 
 .item {
+  height: 2.5rem;
   margin: 0.5rem 0;
-  padding: 0.5rem;
   border: 1px solid var(--ifm-color-success-dark);
   border-radius: 0.5rem;
-  color: var(--ifm-color-success-dark);
+}
+
+.fill {
+  height: 100%;
+  border-radius: 0.4rem;
+  padding: 0.5rem;
+  color: var(--ifm-button-color);
+  background-color: var(--ifm-color-success-dark);
 }

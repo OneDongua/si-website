@@ -98,13 +98,22 @@ export default function VoteResult() {
               <div className={styles.title}>{datas[id].title}</div>
               <div className={styles.desc}>{datas[id].desc}</div>
               {Object.keys(datas[id].items).map((index) => {
+                const resultItem: VoteResult = results[id] || {};
+                let total = 0;
+                Object.keys(resultItem).forEach((i) => {
+                  total += resultItem[i];
+                });
+                const count =
+                  resultItem[index] !== undefined ? results[id][index] : 0;
                 return (
                   <div className={styles.item} key={index}>
-                    {datas[id].items[index] +
-                      ": " +
-                      (results[id]?.[index] !== undefined
-                        ? results[id][index]
-                        : 0)}
+                    <div
+                      className={styles.fill}
+                      style={{
+                        width: `${total ? (count / total) * 100 : 0}%`,
+                      }}>
+                      {datas[id].items[index] + ": " + count}
+                    </div>
                   </div>
                 );
               })}
