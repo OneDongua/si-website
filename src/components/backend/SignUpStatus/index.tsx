@@ -29,49 +29,56 @@ async function getData() {
 export default function SignUpStatus() {
   const [data, setData] = useState(null);
 
-  useEffect(() => {
-    async function getAndSetData() {
-      setData(await getData());
-    }
+  async function getAndSetData() {
+    setData(await getData());
+  }
+
+  /* useEffect(() => {
     getAndSetData();
-  }, []);
+  }, []); */
 
   return (
     <div className={clsx("card shadow--md", styles.card)}>
-      <table className={styles.table}>
-        <caption className="hero__subtitle text--bold padding--sm">
-          报名人员
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">姓名</th>
-            <th scope="col">班级</th>
-            <th scope="col">邮箱</th>
-            <th scope="col">时间</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data &&
-            Object.keys(data).map((key) => {
-              return (
-                <tr>
-                  <th scope="row">{data[key].name}</th>
-                  <td>{data[key].classes}</td>
-                  <td>{data[key].email}</td>
-                  <td>{new Date(Number.parseInt(key)).toLocaleString()}</td>
-                </tr>
-              );
-            })}
-        </tbody>
-        <tfoot>
-          <tr>
-            <th scope="row" colSpan={3}>
-              总计
-            </th>
-            <td>{data && Object.keys(data).length}</td>
-          </tr>
-        </tfoot>
-      </table>
+      {data ? (
+        <table className={styles.table}>
+          <caption className="hero__subtitle text--bold padding--sm">
+            报名人员
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">姓名</th>
+              <th scope="col">班级</th>
+              <th scope="col">邮箱</th>
+              <th scope="col">时间</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data &&
+              Object.keys(data).map((key) => {
+                return (
+                  <tr>
+                    <th scope="row">{data[key].name}</th>
+                    <td>{data[key].classes}</td>
+                    <td>{data[key].email}</td>
+                    <td>{new Date(Number.parseInt(key)).toLocaleString()}</td>
+                  </tr>
+                );
+              })}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th scope="row" colSpan={3}>
+                总计
+              </th>
+              <td>{data && Object.keys(data).length}</td>
+            </tr>
+          </tfoot>
+        </table>
+      ) : (
+        <button className={clsx("button button--primary", styles.load)} onClick={getAndSetData}>
+          加载数据
+        </button>
+      )}
     </div>
   );
 }

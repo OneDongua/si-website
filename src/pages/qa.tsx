@@ -27,7 +27,7 @@ async function getData() {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error("Network response was not ok");
+        console.error("Network response was not ok");
       }
     })
     .then((data: QADatas) => {
@@ -51,11 +51,11 @@ async function uploadQuestion(data: QAData) {
       if (response.ok) {
         return response.text();
       } else {
-        throw new Error("Network response was not ok");
+        console.error("Network response was not ok");
       }
     })
     .catch((error) => {
-      throw new Error(error);
+      console.error(error);
     });
 }
 

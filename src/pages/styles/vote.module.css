@@ -1,0 +1,54 @@
+.background {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 12rem;
+  gap: 1.5rem;
+}
+
+@media (max-width: 996px) {
+  .background {
+    margin: 1rem 1.5rem;
+  }
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.desc {
+  white-space: pre-line;
+}
+
+.loading {
+  align-self: center;
+  padding: 1rem;
+}
+
+.submit {
+  margin: auto;
+  font-size: 1rem;
+}
+
+.item {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border: 1px solid var(--ifm-color-success-dark);
+  border-radius: 0.5rem;
+  color: var(--ifm-color-success-dark);
+}
+
+.item:hover {
+  background-color: rgba(0, 148, 0, 0.2);
+  cursor: pointer;
+}
+
+.selected {
+  background-color: rgba(0, 148, 0, 0.2);
+}
