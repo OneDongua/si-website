@@ -5,9 +5,12 @@ interface Env {
 export const onRequest: PagesFunction<Env> = async (context) => {
   if (context.request.method === "POST") {
     const body = await context.request.json();
-    Object.keys(body).map(async (id) => {
-      await context.env.VOTE.put(id + "+" + Date.now(), JSON.stringify(body[id]));
-    })
+    for (const id of Object.keys(body)) {
+      await context.env.VOTE.put(
+        id + "+" + Date.now(),
+        JSON.stringify(body[id])
+      );
+    }
     return new Response("Success");
   } else if (context.request.method === "GET") {
     const url = new URL(context.request.url);
@@ -16,6 +19,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     const type = params.get("type");
 
     if (timestamp && Date.now() - parseInt(timestamp) < 10000) {
+      if (!type) return new Response("Error: unknown type", { status: 400 });
       if (type === "calc") {
         const list = await context.env.VOTE.list();
         const keys = list.keys;
