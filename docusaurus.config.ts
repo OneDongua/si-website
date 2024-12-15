@@ -64,7 +64,8 @@ const config: Config = {
         src: "img/logo.png",
       },
       items: [
-        { to: "sign_up", label: "🔥报名", position: "left" },
+        { to: "vote", label: "🔥投票", position: "left" },
+        { to: "sign_up", label: "报名", position: "left" },
         { to: "qa", label: "Q&A", position: "left" },
         {
           type: "doc",
