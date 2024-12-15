@@ -18,6 +18,32 @@
   }
 }
 
+.refresh {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  background-color: var(--ifm-card-background-color);
+  border: none;
+  border-radius: 48px;
+  box-shadow: var(--ifm-global-shadow-md);
+}
+
+.refresh:focus {
+  outline: none;
+}
+
+.refresh:hover {
+  background-color: var(--ifm-color-emphasis-200);
+  cursor: pointer;
+}
+
+.unrefreshable:hover {
+  background-color: var(--ifm-card-background-color) !important;
+  cursor: not-allowed !important;
+}
+
 .group {
   display: flex;
   flex-direction: column;
