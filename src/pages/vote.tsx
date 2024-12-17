@@ -97,13 +97,12 @@ export default function Vote() {
   }
 
   useEffect(() => {
+    window.clearVote = () => {
+      localStorage.clear();
+    };
     getAndSetData();
     if (localStorage.getItem("vote") === "done") setStatus(2);
   }, []);
-
-  window.clearVote = () => {
-    localStorage.clear();
-  };
 
   return (
     <Layout title="投票">
