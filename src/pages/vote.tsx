@@ -5,6 +5,12 @@ import Layout from "@theme/Layout";
 
 import styles from "./styles/vote.module.css";
 
+declare global {
+  interface Window {
+    clearVote?: () => void;
+  }
+}
+
 interface VoteData {
   title: string;
   desc: string;
@@ -78,6 +84,7 @@ export default function Vote() {
       .then((response) => {
         if (response.ok) {
           setStatus(2);
+          localStorage.setItem("vote", "done");
           return response.text();
         } else {
           setStatus(3);
@@ -91,7 +98,12 @@ export default function Vote() {
 
   useEffect(() => {
     getAndSetData();
+    if (localStorage.getItem("vote") === "done") setStatus(2);
   }, []);
+
+  window.clearVote = () => {
+    localStorage.clear();
+  };
 
   return (
     <Layout title="投票">
@@ -123,7 +135,8 @@ export default function Vote() {
                         setResult(res);
                         console.log(res);
                       }}
-                      key={index}>
+                      key={index}
+                    >
                       {datas[id].items[index]}
                     </div>
                   );
@@ -139,7 +152,8 @@ export default function Vote() {
           onClick={() => {
             uploadVote();
           }}
-          disabled={status === 1 || status === 2}>
+          disabled={status === 1 || status === 2}
+        >
           {statusTexts[status]}
         </button>
       </div>

@@ -70,7 +70,7 @@ async function getData() {
     .catch((error) => {
       console.error(error);
       /* mResult = JSON.parse(
-        '{"0": {"0": 10, "1": 0}, "1": {"0": 3, "1": 5, "2": 2}}'
+        '{"0": {"0": 0, "1": 0}, "1": {"0": 3, "1": 5, "2": 2}}'
       ); */
     });
   return { mData, mResult };
@@ -98,20 +98,35 @@ export default function VoteResult() {
 
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.toolbar}>
         <button
           className={clsx(
-            styles.refresh,
+            styles.toolButton,
             isRefreshing ? styles.unrefreshable : null
           )}
           onClick={getAndSetData}
-          disabled={isRefreshing}>
+          disabled={isRefreshing}
+        >
           <svg
             height="24px"
             viewBox="0 -960 960 960"
             width="24px"
-            fill="#5f6368">
+            fill="#5f6368"
+          >
             <path d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z" />
+          </svg>
+        </button>
+        <button
+          className={clsx(styles.toolButton, styles.addButton)}
+          onClick={() => alert("还没做")}
+        >
+          <svg
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="#5f6368"
+          >
+            <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
           </svg>
         </button>
       </div>
@@ -129,7 +144,7 @@ export default function VoteResult() {
                 });
                 const count =
                   resultItem[index] !== undefined ? results[id][index] : 0;
-                const percent = count / total;
+                const percent = count / total || 0;
                 return (
                   <div className={styles.item} key={index}>
                     <div
@@ -142,7 +157,8 @@ export default function VoteResult() {
                       className={clsx(
                         styles.text,
                         percent <= 0.1 ? styles.textOverflow : null
-                      )}>
+                      )}
+                    >
                       {datas[id].items[index] + ": " + count}
                     </div>
                   </div>

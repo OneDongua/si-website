@@ -18,7 +18,12 @@
   }
 }
 
-.refresh {
+.toolbar {
+  display: flex;
+  position: relative;
+}
+
+.toolButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,13 +35,18 @@
   box-shadow: var(--ifm-global-shadow-md);
 }
 
-.refresh:focus {
+.toolButton:focus {
   outline: none;
 }
 
-.refresh:hover {
+.toolButton:hover {
   background-color: var(--ifm-color-emphasis-200);
   cursor: pointer;
+}
+
+.addButton {
+  position: absolute;
+  right: 0;
 }
 
 .unrefreshable:hover {
