@@ -101,6 +101,10 @@ const config: Config = {
               label: "邮箱",
               href: "https://mail.si-hzyz.top",
             },
+            {
+              label: "抽奖器",
+              href: "https://draw.si-hzyz.top",
+            },
           ],
         },
         {
