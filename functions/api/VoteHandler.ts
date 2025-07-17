@@ -10,7 +10,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     const body = await context.request.json();
 
     if (type === "data") {
-      await context.env.VOTE.put("datas", body)
+      await context.env.VOTE.put("datas", JSON.stringify(body))
     } else {
       for (const id of Object.keys(body)) {
         await context.env.VOTE.put(

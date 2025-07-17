@@ -25,9 +25,9 @@ async function getData() {
     })
     .catch((error) => {
       console.error(error);
-      mData = JSON.parse(
+      /* mData = JSON.parse(
         '{"0": {"title": "test", "desc": "abc", "items": {"0": "abc", "1": "def"}, "max": 1}, "1": {"title": "test2", "desc": "666", "items": {"0": "aaa", "1": "bbb", "2": "ccc"}, "max": 1}}'
-      );
+      ); */
     });
   let mResult: VoteResultsData;
   await fetch("/api/VoteHandler?type=calc&timestamp=" + Date.now().toString(), {
@@ -48,9 +48,9 @@ async function getData() {
     })
     .catch((error) => {
       console.error(error);
-      mResult = JSON.parse(
+      /* mResult = JSON.parse(
         '{"0": {"0": 0, "1": 0}, "1": {"0": 3, "1": 5, "2": 2}}'
-      );
+      ); */
     });
   return { mData, mResult };
 }
