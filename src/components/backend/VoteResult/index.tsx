@@ -78,8 +78,8 @@ async function uploadData(data: VoteDatas) {
 }
 
 async function deleteVote(id: number) {
-  await fetch(`/api/voteHandler?id=${id}&timestamp=${Date.now()}`, {
-    method: "DELETE",
+  await fetch(`/api/voteHandler?type=delete&id=${id}&timestamp=${Date.now()}`, {
+    method: "GET",
   })
     .then((response) => {
       if (response.ok) {
