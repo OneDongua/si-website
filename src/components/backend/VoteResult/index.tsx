@@ -77,24 +77,6 @@ async function uploadData(data: VoteDatas) {
     });
 }
 
-async function deleteVote(id: number) {
-  await fetch(`/api/VoteHandler?type=delete&id=${id}&timestamp=${Date.now()}`, {
-    method: "GET",
-  })
-    .then((response) => {
-      if (response.ok) {
-        alert("删除成功");
-        return response.text();
-      } else {
-        throw new Error("Network response was not ok");
-      }
-    })
-    .catch((error) => {
-      alert("删除失败");
-      console.error(error);
-    });
-}
-
 export default function VoteResult() {
   const [datas, setDatas] = useState(null as VoteDatas);
   const [results, setResults] = useState(null as VoteResultsData);
@@ -120,13 +102,6 @@ export default function VoteResult() {
   useEffect(() => {
     getAndSetData();
   }, []);
-
-  async function handleDelete(id: number) {
-    if (window.confirm("确定要删除此投票吗？")) {
-      await deleteVote(id);
-      getAndSetData(); // 删除后刷新数据
-    }
-  }
 
   return (
     <div className={styles.container}>
@@ -272,7 +247,34 @@ export default function VoteResult() {
                 </div>
                 <button
                   className={styles.deleteButton}
-                  onClick={() => handleDelete(parseInt(id))}>
+                  onClick={() => {
+                    if (window.confirm("确定要删除此投票吗？")) {
+                      fetch(
+                        `/api/VoteHandler?type=delete&id=${id}&timestamp=${Date.now()}`,
+                        {
+                          method: "GET",
+                        }
+                      )
+                        .then((response) => {
+                          if (response.ok) {
+                            alert("删除成功");
+                            setDatas((prev) => {
+                              const newDatas = { ...prev };
+                              delete newDatas[id];
+                              return newDatas;
+                            });
+
+                            return response.text();
+                          } else {
+                            throw new Error("Network response was not ok");
+                          }
+                        })
+                        .catch((error) => {
+                          alert("删除失败");
+                          console.error(error);
+                        });
+                    }
+                  }}>
                   <svg
                     height="24px"
                     viewBox="0 -960 960 960"
