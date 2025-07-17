@@ -4,19 +4,29 @@ interface Env {
 
 export const onRequest: PagesFunction<Env> = async (context) => {
   if (context.request.method === "POST") {
+    const url = new URL(context.request.url);
+    const params = url.searchParams;
+    const type = params.get("type");
     const body = await context.request.json();
-    for (const id of Object.keys(body)) {
-      await context.env.VOTE.put(
-        id + "+" + Date.now(),
-        JSON.stringify(body[id])
-      );
+
+    if (type === "data") {
+      await context.env.VOTE.put("datas", JSON.stringify(body))
+    } else {
+      for (const id of Object.keys(body)) {
+        await context.env.VOTE.put(
+          id + "+" + Date.now(),
+          JSON.stringify(body[id])
+        );
+      }
     }
+
     return new Response("Success");
   } else if (context.request.method === "GET") {
     const url = new URL(context.request.url);
     const params = url.searchParams;
     const timestamp = params.get("timestamp");
     const type = params.get("type");
+    const id = params.get("id");
 
     if (timestamp && Date.now() - parseInt(timestamp) < 10000) {
       if (!type) return new Response("Error: unknown type", { status: 400 });
@@ -43,8 +53,25 @@ export const onRequest: PagesFunction<Env> = async (context) => {
           type: "json",
         });
         return new Response(JSON.stringify(data));
+      } else if (type === "delete") {
+        if (!id) return new Response("Error: no id provided.", { status: 400 });
+
+        const datas = await context.env.VOTE.get("datas", { type: "json" });
+        if (datas) {
+          delete datas[id];
+          await context.env.VOTE.put("datas", JSON.stringify(datas));
+        }
+
+        const list = await context.env.VOTE.list();
+        for (const key of list.keys) {
+          if (key.name.startsWith(id + "+")) {
+            await context.env.VOTE.delete(key.name);
+          }
+        }
+
+        return new Response("Success");
       }
     }
   }
   return new Response("Error: unknown error", { status: 400 });
-};
+}
