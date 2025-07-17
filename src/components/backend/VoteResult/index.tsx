@@ -25,9 +25,9 @@ async function getData() {
     })
     .catch((error) => {
       console.error(error);
-      /* mData = JSON.parse(
+      mData = JSON.parse(
         '{"0": {"title": "test", "desc": "abc", "items": {"0": "abc", "1": "def"}, "max": 1}, "1": {"title": "test2", "desc": "666", "items": {"0": "aaa", "1": "bbb", "2": "ccc"}, "max": 1}}'
-      ); */
+      );
     });
   let mResult: VoteResultsData;
   await fetch("/api/VoteHandler?type=calc&timestamp=" + Date.now().toString(), {
@@ -48,9 +48,9 @@ async function getData() {
     })
     .catch((error) => {
       console.error(error);
-      /* mResult = JSON.parse(
+      mResult = JSON.parse(
         '{"0": {"0": 0, "1": 0}, "1": {"0": 3, "1": 5, "2": 2}}'
-      ); */
+      );
     });
   return { mData, mResult };
 }
@@ -73,6 +73,24 @@ async function uploadData(data: VoteDatas) {
     })
     .catch((error) => {
       alert("上传失败");
+      console.error(error);
+    });
+}
+
+async function deleteVote(id: number) {
+  await fetch(`/api/voteHandler?id=${id}&timestamp=${Date.now()}`, {
+    method: "DELETE",
+  })
+    .then((response) => {
+      if (response.ok) {
+        alert("删除成功");
+        return response.text();
+      } else {
+        throw new Error("Network response was not ok");
+      }
+    })
+    .catch((error) => {
+      alert("删除失败");
       console.error(error);
     });
 }
@@ -102,6 +120,13 @@ export default function VoteResult() {
   useEffect(() => {
     getAndSetData();
   }, []);
+
+  async function handleDelete(id: number) {
+    if (window.confirm("确定要删除此投票吗？")) {
+      await deleteVote(id);
+      getAndSetData(); // 删除后刷新数据
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -136,7 +161,7 @@ export default function VoteResult() {
 
       {isModalOpen && (
         <div className={styles.modalOverlay}>
-          <div className={styles.modal}>
+          <div className={clsx(styles.modal, "card")}>
             <h3>添加新投票</h3>
             <input
               type="text"
@@ -240,8 +265,23 @@ export default function VoteResult() {
         Object.keys(datas).map((id) => {
           return (
             <div className={clsx(styles.group, "card shadow--md")} key={id}>
-              <div className={styles.title}>{datas[id].title}</div>
-              <div className={styles.desc}>{datas[id].desc}</div>
+              <div className={styles.head}>
+                <div>
+                  <div className={styles.title}>{datas[id].title}</div>
+                  <div className={styles.desc}>{datas[id].desc}</div>
+                </div>
+                <button
+                  className={styles.deleteButton}
+                  onClick={() => handleDelete(parseInt(id))}>
+                  <svg
+                    height="24px"
+                    viewBox="0 -960 960 960"
+                    width="24px"
+                    fill="#1f1f1f">
+                    <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
+                  </svg>
+                </button>
+              </div>
               {Object.keys(datas[id].items).map((index) => {
                 const resultItem: VoteResultData = results[id] || {};
                 let total = 0;

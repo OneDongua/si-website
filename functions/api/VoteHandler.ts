@@ -54,6 +54,30 @@ export const onRequest: PagesFunction<Env> = async (context) => {
         return new Response(JSON.stringify(data));
       }
     }
+  } else if (context.request.method === "DELETE") {
+    const url = new URL(context.request.url);
+    const params = url.searchParams;
+    const timestamp = params.get("timestamp");
+    const id = params.get("id");
+
+    if (timestamp && Date.now() - parseInt(timestamp) < 10000) {
+        if (!id) return new Response("Error: no id provided.", { status: 400 });
+
+        const datas = await context.env.VOTE.get("datas", { type: "json" });
+        if (datas) {
+            delete datas[id];
+            await context.env.VOTE.put("datas", JSON.stringify(datas));
+        }
+
+        const list = await context.env.VOTE.list();
+        for (const key of list.keys) {
+            if (key.name.startsWith(id + "+")) {
+                await context.env.VOTE.delete(key.name);
+            }
+        }
+
+        return new Response("Success");
+    }
   }
   return new Response("Error: unknown error", { status: 400 });
-};
+}
