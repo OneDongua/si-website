@@ -65,7 +65,7 @@ export default function Vote() {
       .then((response) => {
         if (response.ok) {
           setStatus(2);
-          localStorage.setItem("vote", "done");
+          //localStorage.setItem("vote", "done");
           return response.text();
         } else {
           setStatus(3);
@@ -82,7 +82,7 @@ export default function Vote() {
       localStorage.clear();
     };
     getAndSetData();
-    if (localStorage.getItem("vote") === "done") setStatus(2);
+    //if (localStorage.getItem("vote") === "done") setStatus(2);
   }, []);
 
   return (

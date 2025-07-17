@@ -65,14 +65,10 @@ async function uploadData(data: VoteDatas) {
   })
     .then((response) => {
       if (response.ok) {
-        return response.json();
+        alert("上传成功");
+        return response.text();
       } else {
         throw new Error("Network response was not ok");
-      }
-    })
-    .then((data) => {
-      if (data.msg === "Success") {
-        alert("上传成功");
       }
     })
     .catch((error) => {
