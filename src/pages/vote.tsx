@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import Layout from "@theme/Layout";
 
+import { VoteDatas, VoteResultData } from "../types/VoteTypes";
 import styles from "./styles/vote.module.css";
 
 declare global {
@@ -10,26 +11,6 @@ declare global {
     clearVote?: () => void;
   }
 }
-
-interface VoteData {
-  title: string;
-  desc: string;
-  items: VoteItems;
-  max: number;
-}
-
-interface VoteDatas {
-  [id: number]: VoteData;
-}
-
-interface VoteItems {
-  [index: number]: string;
-}
-
-interface VoteResult {
-  [id: number]: number[];
-}
-
 async function getData() {
   let mData: VoteDatas;
   await fetch("/api/VoteHandler?type=get&timestamp=" + Date.now().toString(), {
@@ -58,7 +39,7 @@ async function getData() {
 }
 export default function Vote() {
   const [datas, setDatas] = useState(null as VoteDatas);
-  const [result, setResult] = useState({} as VoteResult);
+  const [result, setResult] = useState({} as VoteResultData);
   const [status, setStatus] = useState(0);
 
   const statusTexts = {

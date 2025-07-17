@@ -4,13 +4,22 @@ interface Env {
 
 export const onRequest: PagesFunction<Env> = async (context) => {
   if (context.request.method === "POST") {
+    const url = new URL(context.request.url);
+    const params = url.searchParams;
+    const type = params.get("type");
     const body = await context.request.json();
-    for (const id of Object.keys(body)) {
-      await context.env.VOTE.put(
-        id + "+" + Date.now(),
-        JSON.stringify(body[id])
-      );
+
+    if (type === "data") {
+      await context.env.VOTE.put("datas", body)
+    } else {
+      for (const id of Object.keys(body)) {
+        await context.env.VOTE.put(
+          id + "+" + Date.now(),
+          JSON.stringify(body[id])
+        );
+      }
     }
+
     return new Response("Success");
   } else if (context.request.method === "GET") {
     const url = new URL(context.request.url);
