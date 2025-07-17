@@ -215,13 +215,14 @@ export default function VoteResult() {
                   const maxId = Object.keys(datas).reduce((max, item) =>
                     Math.max(parseInt(max), parseInt(item)).toString()
                   );
+                  const mItems: VoteItems = {};
+                  items.forEach((value) => {
+                    mItems[Object.keys(mItems).length] = value.content;
+                  });
                   datas[parseInt(maxId) + 1] = {
                     title: modalTitle,
                     desc: modalDesc,
-                    items: items.reduce<VoteItems>((acc, item) => {
-                      acc[item.id] = item.content;
-                      return acc;
-                    }, {}),
+                    items: mItems,
                     max: maxCount,
                   };
                   uploadData(datas);
