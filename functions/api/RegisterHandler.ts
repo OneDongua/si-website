@@ -11,6 +11,10 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       return new Response(JSON.stringify({ msg: "Error: no request body." }), { status: 400 });
     }
 
+    if (await context.env.USERS.get(body.email)) {
+      return new Response(JSON.stringify({ msg: "Error: user already exists." }), { status: 400 });
+    }
+
     if (body.code !== (await context.env.CODE.get(0)))
       return new Response(JSON.stringify({ msg: "Error: wrong code." }), { status: 400 });
 

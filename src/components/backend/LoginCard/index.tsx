@@ -14,7 +14,7 @@ async function check(email: string, password: string) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email: email }),
+    body: JSON.stringify({ email }),
   })
     .then((response) => {
       if (response.ok) {
@@ -129,7 +129,7 @@ export default function Login() {
               alert("账号或密码错误");
             }
           } catch (error) {
-            alert(error);
+            alert(error.message);
           }
           setStatus(0);
         }}>

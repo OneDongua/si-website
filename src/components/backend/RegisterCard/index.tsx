@@ -26,11 +26,6 @@ async function checkAndRegister(email: string, password: string, code: string) {
         throw new Error((await response.json()).msg);
       }
     })
-    .then((data) => {
-      if (data.msg !== "Success") {
-        throw new Error(data);
-      }
-    })
     .catch((error) => {
       throw new Error(error);
     });
@@ -133,7 +128,7 @@ export default function Login() {
               return () => clearTimeout(timer);
             }
           } catch (error) {
-            alert(error);
+            alert(error.message);
           }
           setStatus(0);
         }}>

@@ -66,7 +66,7 @@ async function uploadData(data: VoteDatas) {
     .then((response) => {
       if (response.ok) {
         alert("上传成功");
-        return response.text();
+        return response.json();
       } else {
         throw new Error("Network response was not ok");
       }

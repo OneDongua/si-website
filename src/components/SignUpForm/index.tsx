@@ -108,7 +108,7 @@ export default function Form(props: {
             },
             body: JSON.stringify({ timestamp: Date.now(), data: data }),
           })
-            .then((response) => {
+            .then(async (response) => {
               if (response.ok) {
                 setStatus(2);
                 if (autoClear) {
@@ -119,13 +119,14 @@ export default function Form(props: {
                     setEmail("");
                   }, 2000);
                 }
-                return response.text();
+                return response.json();
               } else {
                 setStatus(3);
-                throw new Error("Network response was not ok");
+                throw new Error((await response.json()).msg);
               }
             })
             .catch((error) => {
+              alert(error.message);
               console.error(error);
             });
         }}>
