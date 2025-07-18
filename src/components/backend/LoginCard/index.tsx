@@ -11,11 +11,14 @@ async function check(email: string, password: string) {
   let encryptedPassword: string;
   await fetch("/api/LoginHandler", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({ email: email }),
   })
     .then((response) => {
       if (response.ok) {
-        return response.text();
+        return response.json();
       } else {
         throw new Error("Network response was not ok");
       }
@@ -29,7 +32,7 @@ async function check(email: string, password: string) {
 
   if (!encryptedPassword) throw new Error("未找到用户");
 
-  const mEncryptedPassword = CryptoJS.MD5(password + ":" + email).toString();
+  const mEncryptedPassword = CryptoJS.MD5(password + ":" + email).toString();  
   if (mEncryptedPassword === encryptedPassword) return true;
 
   return false;

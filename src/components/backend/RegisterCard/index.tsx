@@ -10,6 +10,9 @@ async function checkAndRegister(email: string, password: string, code: string) {
   const encryptedPassword = CryptoJS.MD5(password + ":" + email).toString();
   await fetch("/api/RegisterHandler", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       email: email,
       password: encryptedPassword,
