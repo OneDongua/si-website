@@ -21,7 +21,7 @@ async function checkAndRegister(email: string, password: string, code: string) {
   })
     .then((response) => {
       if (response.ok) {
-        return response.text();
+        return response.json();
       } else {
         throw new Error("Network response was not ok");
       }
