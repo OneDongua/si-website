@@ -10,22 +10,20 @@ async function checkAndRegister(email: string, password: string, code: string) {
   const encryptedPassword = CryptoJS.MD5(password + ":" + email).toString();
   await fetch("/api/RegisterHandler", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       email: email,
       password: encryptedPassword,
       code: code,
     }),
   })
-    .then((response) => {
+    .then(async (response) => {
       if (response.ok) {
-        return response.text();
+        return response.json();
       } else {
-        throw new Error("Network response was not ok");
-      }
-    })
-    .then((data) => {
-      if (data !== "Success") {
-        throw new Error(data);
+        throw new Error((await response.json()).msg);
       }
     })
     .catch((error) => {
@@ -130,7 +128,7 @@ export default function Login() {
               return () => clearTimeout(timer);
             }
           } catch (error) {
-            alert(error);
+            alert(error.message);
           }
           setStatus(0);
         }}>

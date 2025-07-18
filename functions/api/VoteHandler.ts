@@ -20,7 +20,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       }
     }
 
-    return new Response("Success");
+    return new Response(JSON.stringify({ msg: "Success" }));
   } else if (context.request.method === "GET") {
     const url = new URL(context.request.url);
     const params = url.searchParams;
@@ -69,9 +69,9 @@ export const onRequest: PagesFunction<Env> = async (context) => {
           }
         }
 
-        return new Response("Success");
+        return new Response(JSON.stringify({ msg: "Success" }));
       }
     }
   }
-  return new Response("Error: unknown error", { status: 400 });
+  return new Response(JSON.stringify({ msg: "Error: unknown error" }), { status: 400 });
 }

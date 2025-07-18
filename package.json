@@ -1,6 +1,6 @@
 {
   "name": "si-website",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -12,7 +12,9 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "server": "docusaurus build && cd server && npm run start",
+    "server-dev": "docusaurus build && cd server && npm run dev"
   },
   "dependencies": {
     "@docusaurus/core": "^3.5.2",

@@ -1,6 +1,6 @@
 # si-website
 
-一个使用 [Docusaurus](https://docusaurus.io/zh-CN/) 和 [TypeScript](https://www.typescriptlang.org/zh/) 构建的网站.
+一个使用 [Docusaurus](https://docusaurus.io/zh-CN/) 和 [TypeScript](https://www.typescriptlang.org/zh/) 构建的网站，通过 [Cloudflare Functions](https://developers.cloudflare.com/pages/functions/) 和 [Cloudflare KV](https://developers.cloudflare.com/kv/) 作为无服务器后端，同时借助 AI 转换出了采用 [Express](https://expressjs.com/) 构建的后端.
 
 ## 维护指南
 
@@ -23,15 +23,38 @@
 
 打开项目，在 VSCode 终端输入：
 
-```
-npm install
+```bash
+npm install && cd server && npm install
 ```
 
 #### 3. 运行项目
 
+```bash
+npm run start
 ```
-npm start
+
+#### 4. 构建网站
+``` bash
+npm run build
 ```
+
+#### 5. 启动服务器 (前后端)
+```bash
+npm run server
+```
+
+#### 6. 托管到 Cloudflare Pages
+ 1. Fork 本项目 > 进入 [Cloudflare 仪表盘](https://dash.cloudflare.com/) > (注册账号) > 进入计算 (Workers) > Workers 和 Pages > 创建 > Pages > 导入现有 Git 存储库 > 选择本项目 > 框架预设选择 Docusaurus > 保存并部署
+ 2. [Cloudflare 仪表盘](https://dash.cloudflare.com/) > 存储和数据库 > KV > 新建 > 按表格“值”创建 > Pages > 设置 > 绑定 > 添加 > KV 命名空间 > 按表格添加
+
+| 类型         | 名称        | 值              |
+|--------------|-------------|-----------------|
+| KV 命名空间 | CODE        | si-registerCode |
+| KV 命名空间 | DATA        | si-data         |
+| KV 命名空间 | PART_LIST   | si-participants |
+| KV 命名空间 | QA          | si-qa           |
+| KV 命名空间 | USERS       | si-users        |
+| KV 命名空间 | VOTE        | si-vote         |
 
 ### 你大概率需要经常用到的文档
 

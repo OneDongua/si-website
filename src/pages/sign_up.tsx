@@ -10,7 +10,7 @@ export default function Signup() {
     <Layout title="报名">
       <div className={styles.background}>
         {!masterSwitch && (
-          <b className="alert alert--danger shadow--md">❌ 报名已截止</b>
+          <b className="alert alert--danger shadow--md">❌ 报名尚未开始</b>
         )}
         <SignUpForm masterSwitch={masterSwitch} autoClear={true} />
       </div>

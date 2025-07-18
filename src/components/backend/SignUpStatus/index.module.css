@@ -11,6 +11,14 @@
   word-break: keep-all;
 }
 
+.table > tbody {
+  word-break: break-all;
+}
+
+.table > tbody > tr > th {
+  word-break: keep-all;
+}
+
 @media (max-width: 640px) {
   .table {
     margin: 0;
