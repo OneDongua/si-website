@@ -92,7 +92,7 @@ export default function Vote() {
           Object.keys(datas).length === 0 ? (
             <h3 style={{ margin: "32px" }}>暂无投票</h3>
           ) : (
-            (Object.keys(datas).map((id) => {
+            Object.keys(datas).map((id) => {
               return (
                 <div className={clsx(styles.group, "card shadow--md")} key={id}>
                   <div className={styles.title}>{datas[id].title}</div>
@@ -125,21 +125,21 @@ export default function Vote() {
                   })}
                 </div>
               );
-            }),
-            (
-              <button
-                className={clsx(styles.submit, "button button--primary")}
-                onClick={() => {
-                  uploadVote();
-                }}
-                disabled={status === 1 || status === 2}>
-                {statusTexts[status]}
-              </button>
-            ))
+            })
           )
         ) : (
           <div className={styles.loading}>加载中…</div>
         )}
+        <button
+          className={clsx(styles.submit, "button button--primary")}
+          onClick={() => {
+            uploadVote();
+          }}
+          disabled={
+            status === 1 || status === 2 || Object.keys(result).length === 0
+          }>
+          {statusTexts[status]}
+        </button>
       </div>
     </Layout>
   );
