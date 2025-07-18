@@ -20,7 +20,7 @@ async function getData() {
       }
     })
     .then((data) => {
-      array = data.economy;
+      array = data.economy || [];
     })
     .catch((error) => {
       console.error(error);

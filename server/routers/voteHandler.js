@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
       KVNamespace.put("datas", body);
     } else {
       for (const id of Object.keys(body)) {
-        KVNamespace.put(id + "+" + Date.now(),body[id]);
+        KVNamespace.put(id + "+" + Date.now(), body[id]);
       }
     }
 
@@ -70,7 +70,7 @@ router.get("/", async (req, res) => {
         for (const key of keys) {
           if (/^\d+\+\d+$/.test(key.name)) {
             const [voteId, _] = key.name.split("+");
-            const items = JSON.parse(KVNamespace.get(key.name) || "[]");
+            const items = KVNamespace.get(key.name) || [];
 
             for (const item of items) {
               if (!data[voteId]) data[voteId] = {};
@@ -82,12 +82,12 @@ router.get("/", async (req, res) => {
 
         return res.json(data);
       } else if (type === "get") {
-        const data = JSON.parse(KVNamespace.get("datas") || "{}");
+        const data = KVNamespace.get("datas") || {};
         return res.json(data);
       } else if (type === "delete") {
         if (!id) return res.status(400).json({ msg: "Error: no id provided." });
 
-        const datas = JSON.parse(KVNamespace.get("datas") || "{}");
+        const datas = KVNamespace.get("datas") || {};
         if (datas) {
           delete datas[id];
           KVNamespace.put("datas", datas);

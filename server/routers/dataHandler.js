@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
     if (body.get) {
       const what = body.get;
       if (what === "economy") {
-        return res.json(KVNamespace.get("__economy") || "{}");
+        return res.json(KVNamespace.get("__economy") || {});
       }
       if (what === "user") {
         return res.json(KVNamespace.get(body.email) || null);

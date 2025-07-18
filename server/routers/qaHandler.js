@@ -61,7 +61,7 @@ router.get("/", async (req, res) => {
       const data = {};
 
       for (const key of keys) {
-        data[key.name] = JSON.parse(KVNamespace.get(key.name) || "null");
+        data[key.name] = KVNamespace.get(key.name) || null;
       }
 
       return res.json(data);

@@ -15,6 +15,12 @@ const KVNamespace = {
     data[key] = value;
     writeKVFile(PART_LIST_FILE, data);
   },
+  list: () => {
+    const data = readKVFile(PART_LIST_FILE);
+    return {
+      keys: Object.keys(data).map((key) => ({ name: key })),
+    };
+  },
 };
 
 router.post("/", async (req, res) => {
@@ -26,7 +32,7 @@ router.post("/", async (req, res) => {
     }
 
     // 将报名信息存储到PART_LIST文件中
-    KVNamespace.put(body.timestamp.toString(),body.data);
+    KVNamespace.put(body.timestamp.toString(), body.data);
 
     return res.json({ msg: "Success" });
   } catch (error) {
@@ -45,7 +51,7 @@ router.get("/", async (req, res) => {
       const data = {};
 
       for (const key of keys) {
-        data[key.name] = JSON.parse(KVNamespace.get(key.name) || "null");
+        data[key.name] = KVNamespace.get(key.name) || null;
       }
 
       return res.json(data);
