@@ -19,15 +19,15 @@ async function checkAndRegister(email: string, password: string, code: string) {
       code: code,
     }),
   })
-    .then((response) => {
+    .then(async (response) => {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error("Network response was not ok");
+        throw new Error((await response.json()).msg);
       }
     })
     .then((data) => {
-      if (data !== "Success") {
+      if (data.msg !== "Success") {
         throw new Error(data);
       }
     })
