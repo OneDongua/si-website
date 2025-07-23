@@ -301,6 +301,11 @@ export default function VoteResult() {
                                   delete newDatas[id];
                                   return newDatas;
                                 });
+                                setResults((prev) => {
+                                  const newResults = { ...prev };
+                                  delete newResults[id];
+                                  return newResults;
+                                })
 
                                 return response.text();
                               } else {
