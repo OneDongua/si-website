@@ -208,8 +208,10 @@ export default function VoteResult() {
               <button
                 className="button button--primary"
                 onClick={() => {
-                  const maxId = Object.keys(datas).reduce((max, item) =>
-                    Math.max(parseInt(max), parseInt(item)).toString()
+                  const maxId = Object.keys(datas).reduce(
+                    (max, item) =>
+                      Math.max(parseInt(max), parseInt(item)).toString(),
+                    "0"
                   );
                   const mItems: VoteItems = {};
                   items.forEach((value) => {
