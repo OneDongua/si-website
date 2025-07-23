@@ -1,27 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { readKVFile, writeKVFile, kvNamespaces } = require("../utils/kvUtils");
+const { kvNamespaces, createKVNamespace } = require("../utils/kvUtils");
 
-const PART_LIST_FILE = kvNamespaces.PART_LIST;
-
-// 模拟KVNamespace
-const KVNamespace = {
-  get: (key) => {
-    const data = readKVFile(PART_LIST_FILE);
-    return data[key] || null;
-  },
-  put: (key, value) => {
-    const data = readKVFile(PART_LIST_FILE);
-    data[key] = value;
-    writeKVFile(PART_LIST_FILE, data);
-  },
-  list: () => {
-    const data = readKVFile(PART_LIST_FILE);
-    return {
-      keys: Object.keys(data).map((key) => ({ name: key })),
-    };
-  },
-};
+const KVNamespace = createKVNamespace(kvNamespaces.PART_LIST);
 
 router.post("/", async (req, res) => {
   try {
