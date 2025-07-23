@@ -25,9 +25,9 @@ async function getData() {
     })
     .catch((error) => {
       console.error(error);
-      /* mData = JSON.parse(
-        '{"0": {"title": "test", "desc": "abc", "items": {"0": "abc", "1": "def"}, "max": 1}, "1": {"title": "test2", "desc": "666", "items": {"0": "aaa", "1": "bbb", "2": "ccc"}, "max": 1}}'
-      ); */
+      mData = JSON.parse(
+        '{"0": {"title": "test", "desc": "abc", "items": {"0": "abc", "1": "def"}, "max": 1, "disabled": true}, "1": {"title": "test2", "desc": "666", "items": {"0": "aaa", "1": "bbb", "2": "ccc"}, "max": 1, "disabled": false}}'
+      );
     });
   let mResult: VoteResultsData;
   await fetch("/api/VoteHandler?type=calc&timestamp=" + Date.now().toString(), {
@@ -48,9 +48,9 @@ async function getData() {
     })
     .catch((error) => {
       console.error(error);
-      /* mResult = JSON.parse(
+      mResult = JSON.parse(
         '{"0": {"0": 0, "1": 0}, "1": {"0": 3, "1": 5, "2": 2}}'
-      ); */
+      );
     });
   return { mData, mResult };
 }
@@ -208,8 +208,10 @@ export default function VoteResult() {
               <button
                 className="button button--primary"
                 onClick={() => {
-                  const maxId = Object.keys(datas).reduce((max, item) =>
-                    Math.max(parseInt(max), parseInt(item)).toString()
+                  const maxId = Object.keys(datas).reduce(
+                    (max, item) =>
+                      Math.max(parseInt(max), parseInt(item)).toString(),
+                    "0"
                   );
                   const mItems: VoteItems = {};
                   items.forEach((value) => {
@@ -220,6 +222,7 @@ export default function VoteResult() {
                     desc: modalDesc,
                     items: mItems,
                     max: maxCount,
+                    disabled: false,
                   };
                   uploadData(datas);
                   setIsModalOpen(false);
@@ -245,47 +248,85 @@ export default function VoteResult() {
               <div className={clsx(styles.group, "card shadow--md")} key={id}>
                 <div className={styles.head}>
                   <div>
-                    <div className={styles.title}>{datas[id].title}</div>
+                    <div className={styles.titleBox}>
+                      <div className={styles.title}>{datas[id].title}</div>
+                      {datas[id].disabled && (
+                        <span className="badge badge--danger">已暂停</span>
+                      )}
+                    </div>
                     <div className={styles.desc}>{datas[id].desc}</div>
                   </div>
-                  <button
-                    className={styles.deleteButton}
-                    onClick={() => {
-                      if (window.confirm("确定要删除此投票吗？")) {
-                        fetch(
-                          `/api/VoteHandler?type=delete&id=${id}&timestamp=${Date.now()}`,
-                          {
-                            method: "GET",
-                          }
-                        )
-                          .then((response) => {
-                            if (response.ok) {
-                              alert("删除成功");
-                              setDatas((prev) => {
-                                const newDatas = { ...prev };
-                                delete newDatas[id];
-                                return newDatas;
-                              });
-
-                              return response.text();
-                            } else {
-                              throw new Error("Network response was not ok");
+                  <div className={styles.actions}>
+                    <button
+                      className={styles.actionButton}
+                      onClick={() => {
+                        const newDatas = { ...datas };
+                        newDatas[id].disabled = !newDatas[id].disabled;
+                        setDatas(newDatas);
+                        uploadData(newDatas);
+                      }}>
+                      {datas[id].disabled ? (
+                        <svg
+                          height="24px"
+                          viewBox="0 -960 960 960"
+                          width="24px"
+                          fill="#5f6368">
+                          <path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z" />
+                        </svg>
+                      ) : (
+                        <svg
+                          height="24px"
+                          viewBox="0 -960 960 960"
+                          width="24px"
+                          fill="#5f6368">
+                          <path d="M520-200v-560h240v560H520Zm-320 0v-560h240v560H200Zm400-80h80v-400h-80v400Zm-320 0h80v-400h-80v400Zm0-400v400-400Zm320 0v400-400Z" />
+                        </svg>
+                      )}
+                    </button>
+                    <button
+                      className={styles.actionButton}
+                      onClick={() => {
+                        if (window.confirm("确定要删除此投票吗？")) {
+                          fetch(
+                            `/api/VoteHandler?type=delete&id=${id}&timestamp=${Date.now()}`,
+                            {
+                              method: "GET",
                             }
-                          })
-                          .catch((error) => {
-                            alert("删除失败");
-                            console.error(error);
-                          });
-                      }
-                    }}>
-                    <svg
-                      height="24px"
-                      viewBox="0 -960 960 960"
-                      width="24px"
-                      fill="#1f1f1f">
-                      <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
-                    </svg>
-                  </button>
+                          )
+                            .then((response) => {
+                              if (response.ok) {
+                                alert("删除成功");
+                                setDatas((prev) => {
+                                  const newDatas = { ...prev };
+                                  delete newDatas[id];
+                                  return newDatas;
+                                });
+                                setResults((prev) => {
+                                  const newResults = { ...prev };
+                                  delete newResults[id];
+                                  return newResults;
+                                })
+
+                                return response.text();
+                              } else {
+                                throw new Error("Network response was not ok");
+                              }
+                            })
+                            .catch((error) => {
+                              alert("删除失败");
+                              console.error(error);
+                            });
+                        }
+                      }}>
+                      <svg
+                        height="24px"
+                        viewBox="0 -960 960 960"
+                        width="24px"
+                        fill="#5f6368">
+                        <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
                 {Object.keys(datas[id].items).map((index) => {
                   const resultItem: VoteResultData = results[id] || {};

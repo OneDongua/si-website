@@ -17,7 +17,22 @@
   width: 100%;
   max-width: 600px;
   flex-direction: column;
-  padding: 1rem;
+  padding: 1.2rem;
+}
+
+.info {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem;
+}
+
+.infoText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 
 .title {
@@ -51,6 +66,13 @@
 .item:hover {
   background-color: rgba(0, 148, 0, 0.2);
   cursor: pointer;
+}
+
+.itemDisabled {
+  border-color: var(--ifm-color-secondary-darkest) !important;
+  background-color: var(--ifm-color-secondary-lightest) !important;
+  color: var(--ifm-color-secondary-darkest) !important;
+  cursor: not-allowed !important;
 }
 
 .selected {
