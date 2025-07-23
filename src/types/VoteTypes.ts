@@ -3,6 +3,7 @@ export interface VoteData {
   desc: string;
   items: VoteItems;
   max: number;
+  disabled: boolean;
 }
 
 export interface VoteDatas {

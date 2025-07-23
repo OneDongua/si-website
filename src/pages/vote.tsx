@@ -32,7 +32,7 @@ async function getData() {
     .catch((error) => {
       console.error(error);
       /* mData = JSON.parse(
-        '{"0": {"title": "test", "desc": "abc", "items": {"0": "abc", "1": "def"}, "max": 1}, "1": {"title": "test2", "desc": "666", "items": {"0": "aaa", "1": "bbb", "2": "ccc"}, "max": 1}}'
+        '{"0": {"title": "test", "desc": "abc", "items": {"0": "abc", "1": "def"}, "max": 1, "disabled": true}, "1": {"title": "test2", "desc": "666", "items": {"0": "aaa", "1": "bbb", "2": "ccc"}, "max": 1, "disabled": false}}'
       ); */
     });
   return mData;
@@ -95,8 +95,16 @@ export default function Vote() {
             Object.keys(datas).map((id) => {
               return (
                 <div className={clsx(styles.group, "card shadow--md")} key={id}>
-                  <div className={styles.title}>{datas[id].title}</div>
-                  <div className={styles.desc}>{datas[id].desc}</div>
+                  <div className={styles.info}>
+                    <div className={styles.infoText}>
+                      <div className={styles.title}>{datas[id].title}</div>
+                      <div className={styles.desc}>{datas[id].desc}</div>
+                    </div>
+                    {datas[id].disabled && (
+                      <span className="badge badge--danger">已截止</span>
+                    )}
+                  </div>
+
                   {Object.keys(datas[id].items).map((index) => {
                     const indexs: number[] = result[id] || [];
                     const isSelected = indexs.includes(parseInt(index));
@@ -104,9 +112,11 @@ export default function Vote() {
                       <div
                         className={clsx(
                           styles.item,
-                          isSelected ? styles.selected : null
+                          isSelected ? styles.selected : null,
+                          datas[id].disabled ? styles.itemDisabled : null
                         )}
                         onClick={() => {
+                          if (datas[id].disabled) return;
                           const max = parseInt(datas[id].max);
                           const res = { ...result }; //使用展开运算符创建 result 的副本
                           const mIndexs: number[] = res[id] || [];
@@ -116,7 +126,7 @@ export default function Vote() {
                           mIndexs.push(parseInt(index));
                           res[id] = mIndexs;
                           setResult(res);
-                          console.log(res);
+                          //console.log(res);
                         }}
                         key={index}>
                         {datas[id].items[index]}
