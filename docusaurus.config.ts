@@ -99,24 +99,24 @@ const config: Config = {
             },
             {
               label: "邮箱",
-              href: "https://mail.si-hzyz.top",
+              href: "https://alimail.pages.dev",
             },
             {
               label: "抽奖器",
-              href: "https://draw.si-hzyz.top",
+              href: "https://si-prize-drawer.pages.dev",
             },
           ],
         },
         {
-          title: "惠州一中",
+          title: "潓洲一中",
           items: [
             {
               label: "官网",
-              href: "http://www.hzyz.net",
+              href: "http://www.bing.com",
             },
             {
               label: "YOJ",
-              href: "http://oj.hzyz.net",
+              href: "http://www.bing.com",
             },
           ],
         },
@@ -134,7 +134,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} 惠州一中智能信息社. Built with Docusaurus. Powered by Cloudflare Pages.`,
+      copyright: `Copyright © ${new Date().getFullYear()} 潓洲一中智能信息社. Built with Docusaurus. Powered by Cloudflare Pages.`,
     },
     prism: {
       theme: prismThemes.github,
